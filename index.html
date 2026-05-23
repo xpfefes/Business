@@ -12,17 +12,14 @@
    Design: futuristico premium SaaS, glassmorphism, neon soft
    ========================================================= */
 
-/* ---------- 1. RESET & BASE ---------- */
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0;height:100%}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
-  font-family: "Inter","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  font-family:"Inter","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
   font-size:14px;line-height:1.5;color:var(--text);
-  background:var(--bg);
-  overflow:hidden;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+  background:var(--bg);overflow:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:transparent}
@@ -35,30 +32,18 @@ p{margin:0}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
 ::-webkit-scrollbar-thumb:hover{background:var(--border-strong)}
 
-/* ---------- 2. DESIGN TOKENS ---------- */
 :root{
-  /* Palette dark (default) */
-  --bg:              #05070d;
-  --bg-elev:         #0a0f1c;
-  --bg-elev-2:       #0f1629;
-  --surface:         rgba(18,24,44,.55);
-  --surface-strong:  rgba(24,32,58,.78);
-  --border:          rgba(120,140,200,.14);
-  --border-strong:   rgba(140,170,230,.28);
-  --text:            #e7ecf7;
-  --text-dim:        #9aa6c2;
-  --text-mute:       #6b7794;
-  --accent:          #6ea8ff;
-  --accent-2:        #8b5cf6;
-  --accent-3:        #22d3ee;
-  --success:         #34d399;
-  --warn:            #fbbf24;
-  --danger:          #f87171;
-  --neon:            0 0 24px rgba(110,168,255,.35), 0 0 2px rgba(139,92,246,.6);
-  --shadow-lg:       0 20px 60px -20px rgba(0,0,0,.55), 0 8px 24px -10px rgba(0,0,0,.4);
+  --bg:#05070d; --bg-elev:#0a0f1c; --bg-elev-2:#0f1629;
+  --surface:rgba(18,24,44,.55); --surface-strong:rgba(24,32,58,.78);
+  --border:rgba(120,140,200,.14); --border-strong:rgba(140,170,230,.28);
+  --text:#e7ecf7; --text-dim:#9aa6c2; --text-mute:#6b7794;
+  --accent:#6ea8ff; --accent-2:#8b5cf6; --accent-3:#22d3ee;
+  --success:#34d399; --warn:#fbbf24; --danger:#f87171;
+  --neon:0 0 24px rgba(110,168,255,.35), 0 0 2px rgba(139,92,246,.6);
+  --shadow-lg:0 20px 60px -20px rgba(0,0,0,.55), 0 8px 24px -10px rgba(0,0,0,.4);
   --radius-sm:8px; --radius:14px; --radius-lg:20px;
-  --ease: cubic-bezier(.22,.61,.36,1);
-  --sidebar-w: 260px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --sidebar-w:260px;
 }
 :root[data-theme="light"]{
   --bg:#eef2fb; --bg-elev:#f7f9ff; --bg-elev-2:#ffffff;
@@ -70,46 +55,36 @@ p{margin:0}
   --neon:0 0 20px rgba(59,109,240,.25);
 }
 
-/* ---------- 3. BACKGROUND ATMOSPHERE ---------- */
 body::before{
   content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;
   background:
     radial-gradient(40% 35% at 15% 20%, rgba(110,168,255,.18), transparent 60%),
     radial-gradient(35% 30% at 85% 15%, rgba(139,92,246,.18), transparent 60%),
     radial-gradient(45% 40% at 50% 95%, rgba(34,211,238,.12), transparent 65%);
-  filter: blur(10px);
-  animation: drift 22s var(--ease) infinite alternate;
+  filter:blur(10px);animation:drift 22s var(--ease) infinite alternate;
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background-image:
     linear-gradient(rgba(120,150,220,.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(120,150,220,.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at 50% 40%, black 40%, transparent 80%);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse at 50% 40%, black 40%, transparent 80%);
 }
-@keyframes drift{
-  0%  {transform:translate3d(0,0,0) scale(1)}
-  100%{transform:translate3d(-2%,1.5%,0) scale(1.06)}
-}
+@keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-2%,1.5%,0) scale(1.06)}}
 
-/* ---------- 4. BOOT SCREEN ---------- */
 #boot{
   position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
   flex-direction:column;gap:24px;background:var(--bg);
   transition:opacity .8s var(--ease), visibility .8s;
 }
-#boot.hide{opacity:0;visibility:hidden}
+#boot.hide{opacity:0;visibility:hidden;pointer-events:none}
 .boot-logo{
   width:72px;height:72px;border-radius:20px;position:relative;
-  background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
-  animation: spin 2.4s linear infinite;
-  box-shadow: var(--neon);
+  background:conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  animation:spin 2.4s linear infinite;box-shadow:var(--neon);
 }
-.boot-logo::after{
-  content:"";position:absolute;inset:6px;border-radius:16px;background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-}
+.boot-logo::after{content:"";position:absolute;inset:6px;border-radius:16px;background:var(--bg)}
 .boot-logo::before{
   content:"N";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   font-weight:800;font-size:32px;color:var(--text);z-index:1;letter-spacing:-.05em;
@@ -119,22 +94,23 @@ body::after{
 .boot-sub{font-size:12px;color:var(--text-mute);letter-spacing:.24em;text-transform:uppercase}
 .boot-bar{width:260px;height:3px;border-radius:3px;background:var(--border);overflow:hidden}
 .boot-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));
-  animation: fill 1.6s var(--ease) forwards}
+  animation:fill 1.6s var(--ease) forwards}
 @keyframes fill{to{width:100%}}
+.boot-log{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:var(--text-mute);
+  max-width:360px;text-align:center;margin-top:10px;min-height:14px}
 
-/* ---------- 5. AUTH SCREEN ---------- */
 #auth{
   position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;
   background:radial-gradient(60% 50% at 50% 40%, rgba(110,168,255,.15), transparent 70%), var(--bg);
-  padding:24px;
+  padding:24px;transition:opacity .4s var(--ease);
 }
-#auth.hide{display:none}
+#auth.hide{opacity:0;visibility:hidden;pointer-events:none}
 .auth-card{
   width:100%;max-width:420px;padding:36px 32px;border-radius:var(--radius-lg);
-  background:var(--surface);backdrop-filter: blur(22px) saturate(140%);
-  -webkit-backdrop-filter: blur(22px) saturate(140%);
-  border:1px solid var(--border);box-shadow: var(--shadow-lg);
-  animation: rise .7s var(--ease);
+  background:var(--surface);backdrop-filter:blur(22px) saturate(140%);
+  -webkit-backdrop-filter:blur(22px) saturate(140%);
+  border:1px solid var(--border);box-shadow:var(--shadow-lg);
+  animation:rise .7s var(--ease);
 }
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 .auth-card h1{font-size:22px;margin-bottom:4px}
@@ -155,23 +131,20 @@ body::after{
 .pin-pad button:active{transform:scale(.96)}
 .pin-pad button.fn{font-size:12px;color:var(--text-dim);letter-spacing:.1em}
 
-/* ---------- 6. APP SHELL ---------- */
-#app{display:grid;grid-template-columns: var(--sidebar-w) 1fr;height:100vh;opacity:0;
-  transition:opacity .6s var(--ease)}
-#app.show{opacity:1}
+#app{display:grid;grid-template-columns:var(--sidebar-w) 1fr;height:100vh;opacity:0;
+  visibility:hidden;transition:opacity .6s var(--ease), visibility .6s}
+#app.show{opacity:1;visibility:visible}
 
-/* ---------- 7. SIDEBAR ---------- */
 .sidebar{
   display:flex;flex-direction:column;gap:6px;padding:18px 14px;
-  background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg) 100%);
-  border-right:1px solid var(--border);
-  position:relative;z-index:5;
+  background:linear-gradient(180deg, var(--bg-elev) 0%, var(--bg) 100%);
+  border-right:1px solid var(--border);position:relative;z-index:5;overflow-y:auto;
 }
 .brand{display:flex;align-items:center;gap:12px;padding:8px 10px 18px}
 .brand-mark{width:36px;height:36px;border-radius:10px;flex:0 0 auto;
-  background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  background:conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
   display:flex;align-items:center;justify-content:center;font-weight:800;color:#0a0f1c;
-  box-shadow: var(--neon);
+  box-shadow:var(--neon);
 }
 .brand-name{font-weight:700;letter-spacing:.04em}
 .brand-name small{display:block;font-size:10px;color:var(--text-mute);letter-spacing:.3em;font-weight:500}
@@ -182,7 +155,8 @@ body::after{
   transition:all .25s var(--ease);position:relative;
 }
 .nav button:hover{background:var(--surface);color:var(--text)}
-.nav button.active{background:var(--surface-strong);color:var(--text);box-shadow: inset 0 0 0 1px var(--border-strong), var(--neon)}
+.nav button.active{background:var(--surface-strong);color:var(--text);
+  box-shadow:inset 0 0 0 1px var(--border-strong), var(--neon)}
 .nav button.active::before{
   content:"";position:absolute;left:-14px;top:10px;bottom:10px;width:3px;border-radius:3px;
   background:linear-gradient(180deg,var(--accent),var(--accent-2));
@@ -195,7 +169,7 @@ body::after{
   border-radius:10px;background:var(--surface);border:1px solid var(--border)}
 .theme-toggle span{font-size:12px;color:var(--text-dim)}
 .switch{position:relative;width:36px;height:20px;border-radius:20px;background:var(--border-strong);
-  transition:all .3s var(--ease)}
+  transition:all .3s var(--ease);cursor:pointer}
 .switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;
   background:#fff;transition:all .3s var(--ease)}
 .switch.on{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
@@ -204,7 +178,6 @@ body::after{
   color:var(--text-dim);font-size:12px;display:flex;align-items:center;gap:8px;transition:all .25s var(--ease)}
 .lock-btn:hover{color:var(--text);border-color:var(--border-strong)}
 
-/* ---------- 8. WORKSPACE ---------- */
 .workspace{overflow-y:auto;overflow-x:hidden;position:relative}
 .workspace-inner{padding:26px 32px 60px;max-width:1500px;margin:0 auto}
 .topbar{display:flex;align-items:center;gap:16px;margin-bottom:26px;flex-wrap:wrap}
@@ -234,22 +207,19 @@ body::after{
 .btn.danger{background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.3);color:var(--danger)}
 .btn svg{width:15px;height:15px}
 
-/* ---------- 9. VIEWS ---------- */
-.view{display:none;animation: fadeIn .45s var(--ease)}
+.view{display:none;animation:fadeIn .45s var(--ease)}
 .view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ---------- 10. CARDS & KPIs ---------- */
 .grid{display:grid;gap:16px}
 .grid.cols-4{grid-template-columns:repeat(4,1fr)}
 .grid.cols-3{grid-template-columns:repeat(3,1fr)}
 .grid.cols-2{grid-template-columns:repeat(2,1fr)}
 .card{
-  background:var(--surface);backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  background:var(--surface);backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
   border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;position:relative;overflow:hidden;
-  transition:all .3s var(--ease);
+  padding:20px;position:relative;overflow:hidden;transition:all .3s var(--ease);
 }
 .card:hover{border-color:var(--border-strong);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .card h3{font-size:13px;font-weight:500;color:var(--text-dim);margin-bottom:14px;
@@ -266,7 +236,6 @@ body::after{
 }
 .kpi .ico svg{width:20px;height:20px;color:var(--accent)}
 
-/* ---------- 11. CHARTS ---------- */
 .chart-card{padding:22px}
 .chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap}
 .chart-head h3{margin:0}
@@ -277,7 +246,6 @@ body::after{
 .canvas-wrap.tall{height:340px}
 .canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%}
 
-/* ---------- 12. TABLES ---------- */
 .table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
 table.data{width:100%;border-collapse:collapse;font-size:13px}
 table.data th{
@@ -302,7 +270,6 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 .icon-btn:hover{color:var(--text);border-color:var(--border-strong)}
 .icon-btn svg{width:14px;height:14px}
 
-/* ---------- 13. FORMS ---------- */
 .form-row{display:grid;gap:14px;grid-template-columns:repeat(2,1fr);margin-bottom:14px}
 .form-row.full{grid-template-columns:1fr}
 .field label{display:block;font-size:11px;font-weight:500;color:var(--text-dim);
@@ -310,16 +277,17 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 .field input,.field select,.field textarea{
   width:100%;padding:10px 12px;border-radius:10px;background:var(--bg-elev);
   border:1px solid var(--border);color:var(--text);outline:0;
-  transition:all .25s var(--ease);font-size:13px;
+  transition:all .25s var(--ease);font-size:13px;font-family:inherit;
 }
-.field textarea{resize:vertical;min-height:80px;font-family:inherit}
+.field textarea{resize:vertical;min-height:80px}
 .field input:focus,.field select:focus,.field textarea:focus{
   border-color:var(--accent);box-shadow:0 0 0 3px rgba(110,168,255,.15)}
 .field input::placeholder,.field textarea::placeholder{color:var(--text-mute)}
+.field .hint{font-size:11px;color:var(--text-mute);margin-top:6px;line-height:1.5}
+.field.mono input{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.02em}
 
-/* ---------- 14. MODAL ---------- */
 .modal-backdrop{
-  position:fixed;inset:0;z-index:80;background:rgba(3,6,14,.65);backdrop-filter: blur(8px);
+  position:fixed;inset:0;z-index:80;background:rgba(3,6,14,.65);backdrop-filter:blur(8px);
   display:flex;align-items:center;justify-content:center;padding:20px;
   opacity:0;visibility:hidden;transition:all .3s var(--ease);
 }
@@ -335,17 +303,16 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 .modal p.lead{color:var(--text-dim);font-size:13px;margin-bottom:20px}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;flex-wrap:wrap}
 
-/* ---------- 15. TOASTS ---------- */
 #toasts{position:fixed;top:22px;right:22px;z-index:100;display:flex;flex-direction:column;gap:10px;max-width:360px}
 .toast{
   display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;
-  background:var(--surface-strong);backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background:var(--surface-strong);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
   border:1px solid var(--border-strong);box-shadow:var(--shadow-lg);
-  animation: slideIn .35s var(--ease);font-size:13px;
+  animation:slideIn .35s var(--ease);font-size:13px;
 }
 @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
-.toast.out{animation: slideOut .3s var(--ease) forwards}
+.toast.out{animation:slideOut .3s var(--ease) forwards}
 @keyframes slideOut{to{opacity:0;transform:translateX(20px)}}
 .toast .dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex:0 0 auto}
 .toast.info .dot{background:var(--accent)}
@@ -356,10 +323,9 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 .toast .body b{display:block;margin-bottom:2px}
 .toast .body span{color:var(--text-dim);font-size:12px}
 
-/* ---------- 16. COMMAND PALETTE ---------- */
 #palette{
   position:fixed;inset:0;z-index:95;display:flex;justify-content:center;padding-top:14vh;
-  background:rgba(3,6,14,.6);backdrop-filter: blur(10px);
+  background:rgba(3,6,14,.6);backdrop-filter:blur(10px);
   opacity:0;visibility:hidden;transition:all .25s var(--ease);
 }
 #palette.show{opacity:1;visibility:visible}
@@ -393,7 +359,6 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 .palette-foot kbd{padding:1px 5px;border-radius:3px;background:var(--bg-elev);
   border:1px solid var(--border)}
 
-/* ---------- 17. ASSISTANT ---------- */
 .chat{display:flex;flex-direction:column;height:60vh;min-height:420px}
 .chat-body{flex:1;overflow-y:auto;padding:6px 4px;display:flex;flex-direction:column;gap:12px}
 .msg{display:flex;gap:10px;max-width:86%}
@@ -402,12 +367,12 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
   display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
 .msg.bot .avatar{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0f1c}
 .msg.user .avatar{background:var(--surface-strong);border:1px solid var(--border-strong)}
-.msg .bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55}
+.msg .bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;word-wrap:break-word}
 .msg.bot .bubble{background:var(--surface);border:1px solid var(--border)}
 .msg.user .bubble{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
 .typing{display:inline-flex;gap:4px;padding:4px 0}
 .typing span{width:6px;height:6px;border-radius:50%;background:var(--text-dim);
-  animation: bounce 1.2s infinite}
+  animation:bounce 1.2s infinite}
 .typing span:nth-child(2){animation-delay:.2s}
 .typing span:nth-child(3){animation-delay:.4s}
 @keyframes bounce{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
@@ -415,17 +380,22 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 .chat-input input{flex:1;padding:11px 14px;border-radius:10px;background:var(--bg-elev);
   border:1px solid var(--border);outline:0;color:var(--text)}
 .chat-input input:focus{border-color:var(--accent)}
+.ai-status{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;
+  background:var(--bg-elev);border:1px solid var(--border);margin-bottom:12px;font-size:12px}
+.ai-status .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.ai-status.online .dot{background:var(--success);box-shadow:0 0 8px var(--success)}
+.ai-status.offline .dot{background:var(--text-mute)}
+.ai-status b{color:var(--text)}
+.ai-status span{color:var(--text-dim)}
 
-/* ---------- 18. PROGRESS ---------- */
 .progress{height:8px;background:var(--bg-elev);border-radius:8px;overflow:hidden;position:relative}
 .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));
   border-radius:8px;transition:width .6s var(--ease);position:relative}
 .progress>i::after{content:"";position:absolute;inset:0;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
-  animation: shimmer 2s infinite}
+  animation:shimmer 2s infinite}
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
-/* ---------- 19. HEATMAP ---------- */
 .heatmap{display:grid;grid-template-columns:repeat(24,1fr);gap:3px}
 .heatmap .cell{aspect-ratio:1;border-radius:3px;background:var(--bg-elev);
   transition:all .2s var(--ease);cursor:pointer}
@@ -433,15 +403,36 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 .heatmap-labels{display:flex;justify-content:space-between;margin-top:8px;
   font-size:10px;color:var(--text-mute);letter-spacing:.1em}
 
-/* ---------- 20. EMPTY STATE ---------- */
 .empty{text-align:center;padding:50px 20px;color:var(--text-dim)}
 .empty svg{width:48px;height:48px;color:var(--text-mute);margin-bottom:12px}
 .empty h4{font-size:15px;color:var(--text);margin-bottom:4px}
 .empty p{font-size:13px}
 
-/* ---------- 21. RESPONSIVE ---------- */
+/* Settings view */
+.settings-section{margin-bottom:26px}
+.settings-section h3{font-size:12px;color:var(--text-mute);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:12px;font-weight:600}
+.settings-row{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px;border-radius:12px;background:var(--surface);border:1px solid var(--border);
+  margin-bottom:10px;
+}
+.settings-row .meta{flex:1}
+.settings-row .meta b{display:block;margin-bottom:2px;font-size:13px}
+.settings-row .meta span{font-size:12px;color:var(--text-dim)}
+.api-key-display{
+  display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;
+  background:var(--bg-elev);border:1px solid var(--border);
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:var(--text-dim);
+  max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.status-dot.ok{background:var(--success);box-shadow:0 0 6px var(--success)}
+.status-dot.err{background:var(--danger)}
+.status-dot.off{background:var(--text-mute)}
+
 .mobile-toggle{display:none}
-@media (max-width: 980px){
+@media (max-width:980px){
   :root{--sidebar-w:0px}
   #app{grid-template-columns:1fr}
   .sidebar{
@@ -459,12 +450,11 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
   .workspace-inner{padding:18px}
   .form-row{grid-template-columns:1fr}
 }
-@media (max-width: 520px){
+@media (max-width:520px){
   .grid.cols-4{grid-template-columns:1fr}
   .topbar h1{font-size:20px}
 }
 
-/* ---------- 22. PRINT (PDF EXPORT) ---------- */
 @media print{
   body::before,body::after,#toasts,#palette,.sidebar,.topbar .btn,.search-box,.mobile-toggle{display:none !important}
   .workspace{overflow:visible}
@@ -475,23 +465,20 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 </head>
 <body>
 
-<!-- =========================================================
-     BOOT SCREEN
-     ========================================================= -->
+<!-- BOOT -->
 <div id="boot" aria-hidden="true">
-  <div class="boot-logo" aria-hidden="true"></div>
+  <div class="boot-logo"></div>
   <div class="boot-title">NEXA</div>
   <div class="boot-sub">Business Core · Initializing</div>
   <div class="boot-bar"><i></i></div>
+  <div class="boot-log" id="bootLog">loading modules…</div>
 </div>
 
-<!-- =========================================================
-     AUTH SCREEN (Login / PIN)
-     ========================================================= -->
+<!-- AUTH -->
 <section id="auth" class="hide" aria-label="Autenticazione">
   <div class="auth-card" role="dialog" aria-labelledby="auth-title">
     <h1 id="auth-title">Benvenuto in NEXA</h1>
-    <p class="lead">Dashboard enterprise — accesso locale sicuro</p>
+    <p class="lead">Dashboard enterprise con AI Gemini integrata</p>
     <div class="auth-tabs" role="tablist">
       <button class="active" data-auth-tab="login" role="tab">Login</button>
       <button data-auth-tab="pin" role="tab">PIN Lock</button>
@@ -534,19 +521,12 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
   </div>
 </section>
 
-<!-- =========================================================
-     APP SHELL
-     ========================================================= -->
+<!-- APP -->
 <div id="app" aria-hidden="true">
-
-  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar" aria-label="Navigazione principale">
     <div class="brand">
-      <div class="brand-mark" aria-hidden="true">N</div>
-      <div class="brand-name">
-        NEXA
-        <small>BUSINESS CORE</small>
-      </div>
+      <div class="brand-mark">N</div>
+      <div class="brand-name">NEXA<small>BUSINESS CORE</small></div>
     </div>
 
     <div class="nav-section">Workspace</div>
@@ -575,6 +555,12 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 0-7.74 16.33L3 22l3.67-1.26A10 10 0 1 0 12 2z"/><circle cx="8" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="16" cy="12" r="1"/></svg>
         AI Assistant
       </button>
+
+      <div class="nav-section">Sistema</div>
+      <button data-nav="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Impostazioni
+      </button>
     </nav>
 
     <div class="sidebar-foot">
@@ -589,11 +575,8 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
     </div>
   </aside>
 
-  <!-- WORKSPACE -->
   <main class="workspace" id="workspace">
     <div class="workspace-inner">
-
-      <!-- TOPBAR -->
       <div class="topbar">
         <button class="mobile-toggle" id="mobileToggle" aria-label="Apri menu">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -618,10 +601,9 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
         </button>
       </div>
 
-      <!-- ============ VIEW: DASHBOARD ============ -->
+      <!-- DASHBOARD -->
       <section class="view active" data-view="dashboard">
         <div class="grid cols-4" id="kpiGrid" style="margin-bottom:18px"></div>
-
         <div class="grid cols-2" style="margin-bottom:18px">
           <div class="card chart-card">
             <div class="chart-head">
@@ -634,13 +616,10 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
             <div class="canvas-wrap tall"><canvas id="chartCashflow"></canvas></div>
           </div>
           <div class="card chart-card">
-            <div class="chart-head">
-              <h3>Distribuzione Spese per Categoria</h3>
-            </div>
+            <div class="chart-head"><h3>Distribuzione Spese per Categoria</h3></div>
             <div class="canvas-wrap tall"><canvas id="chartCategory"></canvas></div>
           </div>
         </div>
-
         <div class="grid cols-3">
           <div class="card">
             <h3>Attività recente</h3>
@@ -657,10 +636,9 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
         </div>
       </section>
 
-      <!-- ============ VIEW: EXPENSES ============ -->
+      <!-- EXPENSES -->
       <section class="view" data-view="expenses">
         <div class="grid cols-4" id="expKpis" style="margin-bottom:18px"></div>
-
         <div class="card" style="margin-bottom:18px">
           <div class="chart-head">
             <h3 style="margin:0">Transazioni</h3>
@@ -679,16 +657,12 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
           <div class="table-wrap">
             <table class="data" id="expTable">
               <thead>
-                <tr>
-                  <th>Data</th><th>Descrizione</th><th>Categoria</th><th>Tipo</th>
-                  <th style="text-align:right">Importo</th><th></th>
-                </tr>
+                <tr><th>Data</th><th>Descrizione</th><th>Categoria</th><th>Tipo</th><th style="text-align:right">Importo</th><th></th></tr>
               </thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
-
         <div class="grid cols-2">
           <div class="card chart-card">
             <div class="chart-head"><h3>Flusso ultimi 30 giorni</h3></div>
@@ -701,7 +675,7 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
         </div>
       </section>
 
-      <!-- ============ VIEW: CLIENTS ============ -->
+      <!-- CLIENTS -->
       <section class="view" data-view="clients">
         <div class="card" style="margin-bottom:18px">
           <div class="chart-head">
@@ -721,16 +695,12 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
           <div class="table-wrap">
             <table class="data" id="cliTable">
               <thead>
-                <tr>
-                  <th>Cliente</th><th>Email</th><th>Telefono</th><th>Stato</th>
-                  <th>Ultimo contatto</th><th></th>
-                </tr>
+                <tr><th>Cliente</th><th>Email</th><th>Telefono</th><th>Stato</th><th>Ultimo contatto</th><th></th></tr>
               </thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
-
         <div class="grid cols-3">
           <div class="card chart-card">
             <h3>Distribuzione stati</h3>
@@ -743,16 +713,15 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
           <div class="card">
             <h3>Note rapide</h3>
             <p style="font-size:13px;color:var(--text-dim);line-height:1.6" id="cliNotes">
-              Nessuna nota disponibile. Aggiungi clienti con note per vederle qui.
+              Nessuna nota disponibile.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- ============ VIEW: PROJECTS ============ -->
+      <!-- PROJECTS -->
       <section class="view" data-view="projects">
         <div class="grid cols-4" id="prjKpis" style="margin-bottom:18px"></div>
-
         <div class="card" style="margin-bottom:18px">
           <div class="chart-head">
             <h3 style="margin:0">Progetti attivi</h3>
@@ -760,14 +729,13 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
           </div>
           <div id="projectList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px"></div>
         </div>
-
         <div class="card chart-card">
           <div class="chart-head"><h3>Carico di lavoro per priorità</h3></div>
           <div class="canvas-wrap"><canvas id="chartPriority"></canvas></div>
         </div>
       </section>
 
-      <!-- ============ VIEW: ANALYTICS ============ -->
+      <!-- ANALYTICS -->
       <section class="view" data-view="analytics">
         <div class="grid cols-2" style="margin-bottom:18px">
           <div class="card chart-card">
@@ -779,14 +747,12 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
             <div class="canvas-wrap tall"><canvas id="chartClients"></canvas></div>
           </div>
         </div>
-
         <div class="card" style="margin-bottom:18px">
           <h3>Heatmap produttività (ultime 4 settimane × 24h)</h3>
-          <p style="font-size:12px;color:var(--text-mute);margin-bottom:12px">Ogni cella rappresenta transazioni registrate in quella fascia oraria.</p>
+          <p style="font-size:12px;color:var(--text-mute);margin-bottom:12px">Ogni cella = transazioni registrate in quella fascia oraria.</p>
           <div id="heatmap" class="heatmap"></div>
           <div class="heatmap-labels"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>
         </div>
-
         <div class="grid cols-3">
           <div class="card">
             <h3>KPI salute business</h3>
@@ -803,27 +769,112 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
         </div>
       </section>
 
-      <!-- ============ VIEW: ASSISTANT ============ -->
+      <!-- ASSISTANT -->
       <section class="view" data-view="assistant">
         <div class="card">
           <div class="chart-head">
             <h3 style="margin:0">NEXA AI · Business Assistant</h3>
-            <span class="tag blue">Simulated Intelligence</span>
+            <span class="tag blue" id="aiEngineTag">Initializing…</span>
+          </div>
+          <div class="ai-status offline" id="aiStatus">
+            <div class="dot"></div>
+            <div><b id="aiStatusTitle">Offline mode</b><span id="aiStatusSub"> · AI rule-based attiva</span></div>
           </div>
           <div class="chat">
             <div class="chat-body" id="chatBody"></div>
             <div class="chat-input">
-              <input id="chatInput" placeholder="Chiedi: 'come posso ridurre le spese?' oppure 'suggerimenti produttività'..." />
+              <input id="chatInput" placeholder="Chiedi a Gemini: 'analizza le mie spese' o 'suggerimenti profitto'..." />
               <button class="btn primary" id="chatSend">Invia</button>
             </div>
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
-            <button class="btn ghost" data-prompt="Dammi 3 consigli per aumentare il profitto">Profitto</button>
-            <button class="btn ghost" data-prompt="Suggerimenti per produttività del team">Produttività</button>
-            <button class="btn ghost" data-prompt="Analizza le mie spese recenti">Analisi spese</button>
-            <button class="btn ghost" data-prompt="Come gestire meglio i clienti?">Clienti</button>
-            <button class="btn ghost" data-prompt="Quali scadenze ho questa settimana?">Scadenze</button>
+            <button class="btn ghost" data-prompt="Analizza il mio profitto attuale e suggerisci 3 azioni concrete">Profitto</button>
+            <button class="btn ghost" data-prompt="Suggerimenti per la produttività del mio team">Produttività</button>
+            <button class="btn ghost" data-prompt="Analizza le mie spese recenti e identifica anomalie">Analisi spese</button>
+            <button class="btn ghost" data-prompt="Come posso gestire meglio i miei clienti e convertirne di nuovi?">Clienti</button>
+            <button class="btn ghost" data-prompt="Quali scadenze ho questa settimana e come prioritizzarle?">Scadenze</button>
+            <button class="btn ghost" data-prompt="Genera un report executive dei miei KPI principali">Report</button>
           </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view" data-view="settings">
+        <div class="card">
+          <h3>Google Gemini API</h3>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px;line-height:1.6">
+            Collega la tua API key Google AI per abilitare l'assistente Gemini 2.0 Flash.
+            Senza API key, l'app usa un motore rule-based offline.
+          </p>
+          <div class="settings-row">
+            <div class="meta">
+              <b>Stato connessione AI</b>
+              <span id="settingsAiStatus">Verifica in corso…</span>
+            </div>
+            <span id="settingsAiBadge" class="tag gray">—</span>
+          </div>
+          <div class="form-row full">
+            <div class="field mono">
+              <label for="apiKeyInput">API Key Google AI</label>
+              <input id="apiKeyInput" type="password" placeholder="AIza..." autocomplete="off" spellcheck="false" />
+              <div class="hint">
+                Ottieni una key gratuita su <b>aistudio.google.com/app/apikey</b>.
+                La key è salvata nel tuo browser (localStorage) e mai inviata a server terzi diversi da Google.
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="aiModelSelect">Modello</label>
+              <select id="aiModelSelect">
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash (veloce)</option>
+                <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                <option value="gemini-1.5-pro">Gemini 1.5 Pro (qualità)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="aiTempInput">Temperatura (creatività)</label>
+              <input id="aiTempInput" type="number" min="0" max="2" step="0.1" value="0.7" />
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+            <button class="btn primary" id="saveApiKeyBtn">Salva e testa</button>
+            <button class="btn" id="showHideKeyBtn">Mostra/nascondi</button>
+            <button class="btn danger" id="clearApiKeyBtn">Rimuovi key</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3>Dati & Privacy</h3>
+          <div class="settings-section">
+            <div class="settings-row">
+              <div class="meta"><b>Backup completo</b><span>Esporta tutti i dati in JSON</span></div>
+              <button class="btn" id="settingsBackupBtn">Backup JSON</button>
+            </div>
+            <div class="settings-row">
+              <div class="meta"><b>Importa backup</b><span>Ripristina da file JSON</span></div>
+              <button class="btn" id="settingsImportBtn">Importa</button>
+            </div>
+            <div class="settings-row">
+              <div class="meta"><b>Ripristina dati demo</b><span>Sovrascrive i dati attuali con il dataset di esempio</span></div>
+              <button class="btn danger" id="settingsResetBtn">Reset demo</button>
+            </div>
+            <div class="settings-row">
+              <div class="meta"><b>Cancella tutti i dati</b><span>Elimina permanentemente tutto dal browser</span></div>
+              <button class="btn danger" id="settingsWipeBtn">Elimina tutto</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3>Informazioni</h3>
+          <p style="font-size:13px;color:var(--text-dim);line-height:1.7">
+            <b>NEXA Business Core</b> · v2.0 · Single-file HTML app<br>
+            Zero dipendenze esterne · Dati 100% locali · AI ibrida (Gemini + offline fallback)<br>
+            <span style="color:var(--text-mute);font-size:11px">
+              ⚠️ La API key è salvata in localStorage (non cifrata): non usare su dispositivi condivisi.
+            </span>
+          </p>
         </div>
       </section>
 
@@ -834,7 +885,7 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
 <!-- COMMAND PALETTE -->
 <div id="palette" role="dialog" aria-label="Command palette">
   <div class="palette-box">
-    <input class="palette-input" id="paletteInput" placeholder="Digita un comando... (es: 'nuova spesa', 'export', 'tema')" autocomplete="off" />
+    <input class="palette-input" id="paletteInput" placeholder="Digita un comando..." autocomplete="off" />
     <div class="palette-list" id="paletteList"></div>
     <div class="palette-foot">
       <span><kbd>↑</kbd> <kbd>↓</kbd> naviga</span>
@@ -844,10 +895,8 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
   </div>
 </div>
 
-<!-- TOASTS -->
 <div id="toasts" aria-live="polite" aria-atomic="true"></div>
 
-<!-- MODAL -->
 <div class="modal-backdrop" id="modal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 id="modalTitle">Titolo</h2>
@@ -860,44 +909,39 @@ table.data tr:hover td{background:rgba(110,168,255,.04)}
   </div>
 </div>
 
-<!-- Hidden file input for import -->
 <input type="file" id="importFile" accept="application/json" hidden />
 
 <script>
-/* =========================================================
-   NEXA Business Core — JS
-   Architettura modulare in namespace unico (IIFE per modulo).
-   Zero dipendenze esterne.
-   ========================================================= */
 "use strict";
 
 /* =========================================================
-   [1] NEXA.Config — Costanti globali
+   [1] NEXA namespace
    ========================================================= */
 const NEXA = Object.create(null);
 
 NEXA.Config = Object.freeze({
-  STORAGE_KEY:  "nexa.business.core.v1",
-  SESSION_KEY:  "nexa.session.v1",
-  THEME_KEY:    "nexa.theme.v1",
-  PIN_KEY:      "nexa.pin.v1",
-  DEFAULT_PIN:  "1234",
-  MAX_TOASTS:   4,
-  TOAST_MS:     3800,
-  MONTHS_IT:    ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],
-  DAYS_IT:      ["Dom","Lun","Mar","Mer","Gio","Ven","Sab"],
-  CATEGORIES: [
-    "Stipendi","Marketing","Software","Utenze","Affitto","Viaggi",
-    "Consulenze","Hardware","Formazione","Legale","Tasse","Altro"
-  ],
-  PRIORITIES: ["low","medium","high","critical"],
-  STATUS_CLIENT: ["lead","active","paused","closed"],
-  PRIORITY_LABELS: { low:"Bassa", medium:"Media", high:"Alta", critical:"Critica" },
-  STATUS_LABELS:   { lead:"Lead", active:"Attivo", paused:"In pausa", closed:"Chiuso" }
+  STORAGE_KEY:"nexa.business.core.v2",
+  SESSION_KEY:"nexa.session.v2",
+  THEME_KEY:"nexa.theme.v2",
+  PIN_KEY:"nexa.pin.v2",
+  API_KEY:"nexa.gemini.apikey.v1",
+  AI_CFG_KEY:"nexa.ai.config.v1",
+  DEFAULT_PIN:"1234",
+  MAX_TOASTS:4,
+  TOAST_MS:3800,
+  AI_RATE_LIMIT_MS:1000,
+  AI_TIMEOUT_MS:20000,
+  MONTHS_IT:["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],
+  DAYS_IT:["Dom","Lun","Mar","Mer","Gio","Ven","Sab"],
+  CATEGORIES:["Stipendi","Marketing","Software","Utenze","Affitto","Viaggi","Consulenze","Hardware","Formazione","Legale","Tasse","Altro"],
+  PRIORITIES:["low","medium","high","critical"],
+  STATUS_CLIENT:["lead","active","paused","closed"],
+  PRIORITY_LABELS:{low:"Bassa",medium:"Media",high:"Alta",critical:"Critica"},
+  STATUS_LABELS:{lead:"Lead",active:"Attivo",paused:"In pausa",closed:"Chiuso"}
 });
 
 /* =========================================================
-   [2] NEXA.Utils — Funzioni helper pure
+   [2] Utils
    ========================================================= */
 NEXA.Utils = (() => {
   const uid = (p="id") => p + "_" + Math.random().toString(36).slice(2,9) + Date.now().toString(36).slice(-4);
@@ -935,17 +979,15 @@ NEXA.Utils = (() => {
     for (const c of q) { i = s.indexOf(c, i) + 1; if (!i) return false; }
     return true;
   };
-  const hashStr = (s) => {
-    // FNV-1a 32 bit — non crittografico, usato per PIN obfuscation leggera
-    let h = 2166136261 >>> 0;
-    for (let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
-    return (h >>> 0).toString(16);
+  const maskKey = (k) => {
+    if (!k || k.length < 8) return "••••";
+    return k.slice(0,4) + "••••" + k.slice(-4);
   };
-  return Object.freeze({uid,clamp,fmtEUR,fmtNum,fmtDate,fmtDateTime,daysBetween,escapeHTML,debounce,fuzzy,hashStr});
+  return Object.freeze({uid,clamp,fmtEUR,fmtNum,fmtDate,fmtDateTime,daysBetween,escapeHTML,debounce,fuzzy,maskKey});
 })();
 
 /* =========================================================
-   [3] NEXA.EventBus — pub/sub disaccoppiato
+   [3] EventBus
    ========================================================= */
 NEXA.EventBus = (() => {
   const listeners = new Map();
@@ -956,27 +998,22 @@ NEXA.EventBus = (() => {
 })();
 
 /* =========================================================
-   [4] NEXA.Storage — wrapper localStorage con validazione
+   [4] Storage
    ========================================================= */
 NEXA.Storage = (() => {
   const { STORAGE_KEY } = NEXA.Config;
-
   const defaultState = () => ({
-    schema: 1,
-    expenses:   [],
-    clients:    [],
-    projects:   [],
-    activity:   [],
-    budgets:    Object.fromEntries(NEXA.Config.CATEGORIES.map(c => [c, 800])),
-    settings:   { currency:"EUR", fiscalYearStart:"01" }
+    schema: 2,
+    expenses: [], clients: [], projects: [], activity: [],
+    budgets: Object.fromEntries(NEXA.Config.CATEGORIES.map(c => [c, 800])),
+    settings: { currency:"EUR" }
   });
-
   const validate = (raw) => {
     if (!raw || typeof raw !== "object") return null;
     if (typeof raw.schema !== "number") return null;
     const def = defaultState();
     return {
-      schema:   raw.schema || def.schema,
+      schema: raw.schema || def.schema,
       expenses: Array.isArray(raw.expenses) ? raw.expenses : [],
       clients:  Array.isArray(raw.clients)  ? raw.clients  : [],
       projects: Array.isArray(raw.projects) ? raw.projects : [],
@@ -985,7 +1022,6 @@ NEXA.Storage = (() => {
       settings: {...def.settings, ...(raw.settings||{})}
     };
   };
-
   const load = () => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -993,22 +1029,20 @@ NEXA.Storage = (() => {
       const parsed = JSON.parse(raw);
       return validate(parsed) || defaultState();
     } catch (e) {
-      console.warn("[Storage] load failed, reset:", e);
+      console.warn("[Storage] load failed:", e);
       return defaultState();
     }
   };
-
   const save = (state) => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       return true;
     } catch (e) {
       console.error("[Storage] save failed:", e);
-      NEXA.UI && NEXA.UI.toast({type:"error", title:"Storage pieno", msg:"Impossibile salvare i dati. Libera spazio nel browser."});
+      NEXA.UI && NEXA.UI.toast({type:"error", title:"Storage pieno", msg:"Impossibile salvare i dati."});
       return false;
     }
   };
-
   const update = (fn) => {
     const s = load();
     const n = fn(s) || s;
@@ -1016,9 +1050,7 @@ NEXA.Storage = (() => {
     NEXA.EventBus.emit("state:changed", n);
     return n;
   };
-
   const reset = () => { save(defaultState()); NEXA.EventBus.emit("state:changed", defaultState()); };
-
   const exportJSON = () => JSON.stringify(load(), null, 2);
   const importJSON = (jsonStr) => {
     try {
@@ -1033,28 +1065,28 @@ NEXA.Storage = (() => {
       return false;
     }
   };
-
-  return Object.freeze({load,save,update,reset,exportJSON,importJSON});
+  const wipe = () => {
+    [STORAGE_KEY, NEXA.Config.SESSION_KEY, NEXA.Config.API_KEY, NEXA.Config.AI_CFG_KEY, NEXA.Config.PIN_KEY].forEach(k => {
+      try { localStorage.removeItem(k); } catch {}
+    });
+  };
+  return Object.freeze({load,save,update,reset,exportJSON,importJSON,wipe});
 })();
 
 /* =========================================================
-   [5] NEXA.UI — Toast, Modal, Loading
+   [5] UI — Toast, Modal
    ========================================================= */
 NEXA.UI = (() => {
   const toastHost = document.getElementById("toasts");
-
   const toast = ({type="info", title="", msg=""}) => {
     const el = document.createElement("div");
     el.className = "toast " + type;
-    el.innerHTML = `
-      <div class="dot"></div>
-      <div class="body"><b>${NEXA.Utils.escapeHTML(title)}</b><span>${NEXA.Utils.escapeHTML(msg)}</span></div>`;
+    el.innerHTML = `<div class="dot"></div><div class="body"><b>${NEXA.Utils.escapeHTML(title)}</b><span>${NEXA.Utils.escapeHTML(msg)}</span></div>`;
     toastHost.appendChild(el);
     while (toastHost.children.length > NEXA.Config.MAX_TOASTS) toastHost.firstChild.remove();
     setTimeout(() => { el.classList.add("out"); setTimeout(()=>el.remove(), 320); }, NEXA.Config.TOAST_MS);
   };
 
-  /* Modal */
   const modalEl = document.getElementById("modal");
   const modalTitle = document.getElementById("modalTitle");
   const modalLead  = document.getElementById("modalLead");
@@ -1064,9 +1096,8 @@ NEXA.UI = (() => {
 
   const closeModal = (value=false) => {
     modalEl.classList.remove("show");
-    if (modalResolver) { modalResolver(value); modalResolver = null; }
+    if (modalResolver) { const r = modalResolver; modalResolver = null; r(value); }
   };
-
   modalEl.addEventListener("click", (e) => { if (e.target === modalEl || e.target.dataset.modalClose !== undefined) closeModal(false); });
   modalConfirm.addEventListener("click", () => closeModal(true));
 
@@ -1080,21 +1111,23 @@ NEXA.UI = (() => {
     modalEl.classList.add("show");
     return new Promise(res => { modalResolver = res; });
   };
-
   const confirm = (title, lead) => openModal({title, lead, confirmText:"Conferma", danger:true});
 
-  /* Boot */
+  const setBootLog = (msg) => {
+    const el = document.getElementById("bootLog");
+    if (el) el.textContent = msg;
+  };
   const hideBoot = () => {
     const b = document.getElementById("boot");
     b.classList.add("hide");
-    setTimeout(() => b.remove(), 900);
+    setTimeout(() => { try{ b.remove(); }catch{} }, 900);
   };
 
-  return Object.freeze({toast, openModal, closeModal, confirm, hideBoot});
+  return Object.freeze({toast, openModal, closeModal, confirm, hideBoot, setBootLog});
 })();
 
 /* =========================================================
-   [6] NEXA.Auth — Login fake + PIN lock
+   [6] Auth — Login + PIN (FIXED: removes .hide on init)
    ========================================================= */
 NEXA.Auth = (() => {
   const { SESSION_KEY, PIN_KEY, DEFAULT_PIN } = NEXA.Config;
@@ -1105,7 +1138,6 @@ NEXA.Auth = (() => {
   let pinBuffer = "";
 
   const getPin = () => localStorage.getItem(PIN_KEY) || DEFAULT_PIN;
-  const setPin = (p) => localStorage.setItem(PIN_KEY, p);
 
   const switchTab = (name) => {
     tabs.forEach(t => t.classList.toggle("active", t.dataset.authTab === name));
@@ -1115,7 +1147,7 @@ NEXA.Auth = (() => {
   tabs.forEach(t => t.addEventListener("click", () => switchTab(t.dataset.authTab)));
 
   const unlock = () => {
-    sessionStorage.setItem(SESSION_KEY, "1");
+    try { sessionStorage.setItem(SESSION_KEY, "1"); } catch(e) { console.warn("sessionStorage failed:",e); }
     authEl.classList.add("hide");
     appEl.classList.add("show");
     appEl.setAttribute("aria-hidden","false");
@@ -1123,7 +1155,7 @@ NEXA.Auth = (() => {
   };
 
   const lock = () => {
-    sessionStorage.removeItem(SESSION_KEY);
+    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
     appEl.classList.remove("show");
     appEl.setAttribute("aria-hidden","true");
     authEl.classList.remove("hide");
@@ -1139,7 +1171,6 @@ NEXA.Auth = (() => {
     if (k === "clear") { pinBuffer = ""; }
     else if (k === "back") { pinBuffer = pinBuffer.slice(0,-1); }
     else if (pinBuffer.length < 4) { pinBuffer += k; }
-
     renderDots();
     if (pinBuffer.length === 4) {
       setTimeout(() => {
@@ -1185,30 +1216,39 @@ NEXA.Auth = (() => {
 
   document.querySelector("[data-lock]").addEventListener("click", lock);
 
+  // FIX: gestisce correttamente entrambi i casi
   const init = () => {
-    if (sessionStorage.getItem(SESSION_KEY) === "1") {
+    let hasSession = false;
+    try { hasSession = sessionStorage.getItem(SESSION_KEY) === "1"; } catch {}
+    if (hasSession) {
+      // Sessione attiva: salta auth, mostra app
       authEl.classList.add("hide");
       appEl.classList.add("show");
       appEl.setAttribute("aria-hidden","false");
+      console.log("[Auth] sessione attiva, app mostrata");
     } else {
+      // Nessuna sessione: mostra auth screen (FIX: rimuove .hide)
+      authEl.classList.remove("hide");
       switchTab("login");
+      console.log("[Auth] nessuna sessione, auth screen mostrato");
     }
   };
 
-  return Object.freeze({init, lock, unlock, getPin, setPin});
+  return Object.freeze({init, lock, unlock, getPin});
 })();
 
 /* =========================================================
-   [7] NEXA.Router — Navigazione tra viste
+   [7] Router
    ========================================================= */
 NEXA.Router = (() => {
   const TITLES = {
-    dashboard:  ["Dashboard",      "Overview del tuo business in tempo reale"],
-    expenses:   ["Spese",          "Gestione entrate, uscite e budget"],
-    clients:    ["Clienti",        "Rubrica CRM e stato progetti"],
-    projects:   ["Progetti",       "Task, priorità e avanzamento"],
-    analytics:  ["Analytics",      "Grafici, trend e insight strategici"],
-    assistant:  ["AI Assistant",   "Suggerimenti business intelligenti"]
+    dashboard: ["Dashboard","Overview del tuo business in tempo reale"],
+    expenses:  ["Spese","Gestione entrate, uscite e budget"],
+    clients:   ["Clienti","Rubrica CRM e stato progetti"],
+    projects:  ["Progetti","Task, priorità e avanzamento"],
+    analytics: ["Analytics","Grafici, trend e insight strategici"],
+    assistant: ["AI Assistant","Assistente business Gemini"],
+    settings:  ["Impostazioni","Configurazione app e API key"]
   };
   const navBtns = document.querySelectorAll("[data-nav]");
   const views   = document.querySelectorAll(".view");
@@ -1229,6 +1269,7 @@ NEXA.Router = (() => {
     vSub.textContent   = TITLES[name][1];
     NEXA.EventBus.emit("route:change", name);
     document.getElementById("sidebar").classList.remove("open");
+    document.getElementById("workspace").scrollTo({top:0, behavior:"smooth"});
   };
 
   navBtns.forEach(b => b.addEventListener("click", () => go(b.dataset.nav)));
@@ -1240,7 +1281,7 @@ NEXA.Router = (() => {
 })();
 
 /* =========================================================
-   [8] NEXA.Theme — Dark / Light
+   [8] Theme
    ========================================================= */
 NEXA.Theme = (() => {
   const sw = document.getElementById("themeSwitch");
@@ -1248,25 +1289,28 @@ NEXA.Theme = (() => {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
     sw.classList.toggle("on", dark);
     sw.setAttribute("aria-checked", dark);
-    localStorage.setItem(NEXA.Config.THEME_KEY, dark ? "dark" : "light");
+    try { localStorage.setItem(NEXA.Config.THEME_KEY, dark ? "dark" : "light"); } catch {}
     NEXA.EventBus.emit("theme:change", dark ? "dark" : "light");
   };
   const toggle = () => apply(document.documentElement.dataset.theme !== "dark");
   sw.addEventListener("click", toggle);
   sw.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(); }});
-  const init = () => apply((localStorage.getItem(NEXA.Config.THEME_KEY) || "dark") === "dark");
+  const init = () => {
+    let saved = "dark";
+    try { saved = localStorage.getItem(NEXA.Config.THEME_KEY) || "dark"; } catch {}
+    apply(saved === "dark");
+  };
   return Object.freeze({init, toggle});
 })();
 
 /* =========================================================
-   [9] NEXA.Seed — Dati demo realistici per primo avvio
+   [9] Seed
    ========================================================= */
 NEXA.Seed = (() => {
   const needsSeed = () => {
     const s = NEXA.Storage.load();
     return s.expenses.length === 0 && s.clients.length === 0 && s.projects.length === 0;
   };
-
   const rnd = (a,b) => a + Math.random()*(b-a);
   const rndInt = (a,b) => Math.floor(rnd(a,b+1));
   const pick = (arr) => arr[rndInt(0,arr.length-1)];
@@ -1276,44 +1320,35 @@ NEXA.Seed = (() => {
     const items = [];
     const incomeDescs = ["Consulenza Alpha","Progetto Beta","Licenze software","Servizio mens. Gamma","Setup Delta","Audit Epsilon"];
     const expenseDescs = {
-      "Stipendi":   ["Stipendio team","Bonus Q","Contributi"],
-      "Marketing":  ["Google Ads","LinkedIn Ads","Fiera settore","Social sponsor"],
-      "Software":   ["SaaS CRM","Cloud hosting","Licenze Figma","GitHub Teams"],
-      "Utenze":     ["Bolletta luce","Internet","Telefono"],
-      "Affitto":    ["Canone ufficio","Spese condominiali"],
-      "Viaggi":     ["Volo cliente","Hotel trasferta","Rimborso km"],
-      "Consulenze": ["Consulente fiscale","Legale societario"],
-      "Hardware":   ["Monitor 4K","Laptop dev","Tastiere mech"],
-      "Formazione": ["Corso AWS","Libri team","Conference ticket"],
-      "Legale":     ["Contratti","Privacy DPO"],
-      "Tasse":      ["F24 IVA","Acconto IRES"],
-      "Altro":      ["Cancelleria","Caffè ufficio"]
+      "Stipendi":["Stipendio team","Bonus Q","Contributi"],
+      "Marketing":["Google Ads","LinkedIn Ads","Fiera settore","Social sponsor"],
+      "Software":["SaaS CRM","Cloud hosting","Licenze Figma","GitHub Teams"],
+      "Utenze":["Bolletta luce","Internet","Telefono"],
+      "Affitto":["Canone ufficio","Spese condominiali"],
+      "Viaggi":["Volo cliente","Hotel trasferta","Rimborso km"],
+      "Consulenze":["Consulente fiscale","Legale societario"],
+      "Hardware":["Monitor 4K","Laptop dev","Tastiere mech"],
+      "Formazione":["Corso AWS","Libri team","Conference ticket"],
+      "Legale":["Contratti","Privacy DPO"],
+      "Tasse":["F24 IVA","Acconto IRES"],
+      "Altro":["Cancelleria","Caffè ufficio"]
     };
-    // Entrate mensili ultimi 12 mesi
     for (let m=11; m>=0; m--) {
       const count = rndInt(2,5);
       for (let i=0;i<count;i++) {
         items.push({
-          id: NEXA.Utils.uid("e"),
-          date: daysAgo(m*30 + rndInt(0,28)),
-          desc: pick(incomeDescs),
-          category: "Consulenze",
-          type: "income",
-          amount: Math.round(rnd(2500, 14000))
+          id:NEXA.Utils.uid("e"), date:daysAgo(m*30 + rndInt(0,28)),
+          desc:pick(incomeDescs), category:"Consulenze", type:"income",
+          amount:Math.round(rnd(2500, 14000))
         });
       }
     }
-    // Uscite distribuite ultimi 90 giorni
     for (let d=0; d<90; d+=rndInt(1,3)) {
       const cat = pick(NEXA.Config.CATEGORIES);
       const descs = expenseDescs[cat] || ["Spesa generica"];
       items.push({
-        id: NEXA.Utils.uid("e"),
-        date: daysAgo(d),
-        desc: pick(descs),
-        category: cat,
-        type: "expense",
-        amount: Math.round(rnd(30, cat==="Stipendi"?5200:1800))
+        id:NEXA.Utils.uid("e"), date:daysAgo(d), desc:pick(descs), category:cat,
+        type:"expense", amount:Math.round(rnd(30, cat==="Stipendi"?5200:1800))
       });
     }
     return items.sort((a,b) => new Date(b.date) - new Date(a.date));
@@ -1327,45 +1362,30 @@ NEXA.Seed = (() => {
       ["Marco","Romano","Eta Solutions"],["Chiara","Colombo","Theta Group"],
       ["Davide","Greco","Iota Tech"],["Francesca","Marino","Kappa Media"]
     ];
-    return names.map(([n,c,company], i) => ({
-      id: NEXA.Utils.uid("c"),
-      name: `${n} ${c}`,
-      company,
-      email: `${n.toLowerCase()}.${c.toLowerCase()}@${company.toLowerCase().replace(/[^a-z]/g,"")}.it`,
-      phone: `+39 ${rndInt(300,399)} ${rndInt(1000000,9999999)}`,
-      status: pick(NEXA.Config.STATUS_CLIENT),
-      value: Math.round(rnd(5000, 85000)),
-      notes: i%3===0 ? "Cliente strategico, contatto mensile." : "",
-      lastContact: daysAgo(rndInt(1, 45)),
-      createdAt: daysAgo(rndInt(90, 400))
+    return names.map(([n,c,company]) => ({
+      id:NEXA.Utils.uid("c"), name:`${n} ${c}`, company,
+      email:`${n.toLowerCase()}.${c.toLowerCase()}@${company.toLowerCase().replace(/[^a-z]/g,"")}.it`,
+      phone:`+39 ${rndInt(300,399)} ${rndInt(1000000,9999999)}`,
+      status:pick(NEXA.Config.STATUS_CLIENT),
+      value:Math.round(rnd(5000, 85000)), notes:"",
+      lastContact:daysAgo(rndInt(1, 45)),
+      createdAt:daysAgo(rndInt(90, 400))
     }));
   };
 
   const genProjects = () => [
     { id:NEXA.Utils.uid("p"), name:"Redesign portale Alpha", client:"Alpha S.r.l.", progress:68, priority:"high",
-      deadline: daysAgo(-14), tasks:[
-        {t:"Wireframe UX",done:true},{t:"Design system",done:true},{t:"Sviluppo frontend",done:false},{t:"QA & deploy",done:false}
-      ], notes:"Budget approvato, milestone 2 in corso."},
+      deadline:daysAgo(-14), tasks:[{t:"Wireframe UX",done:true},{t:"Design system",done:true},{t:"Frontend",done:false},{t:"QA & deploy",done:false}], notes:""},
     { id:NEXA.Utils.uid("p"), name:"Migrazione cloud Beta", client:"Beta Industries", progress:42, priority:"critical",
-      deadline: daysAgo(-7), tasks:[
-        {t:"Audit infrastruttura",done:true},{t:"Setup VPC",done:true},{t:"Migrazione DB",done:false},{t:"Cut-over",done:false}
-      ], notes:"Finestra di migrazione sabato notte."},
+      deadline:daysAgo(-7), tasks:[{t:"Audit",done:true},{t:"VPC setup",done:true},{t:"Migrazione DB",done:false},{t:"Cut-over",done:false}], notes:""},
     { id:NEXA.Utils.uid("p"), name:"App mobile Gamma", client:"Gamma Digital", progress:85, priority:"medium",
-      deadline: daysAgo(-30), tasks:[
-        {t:"UI kit",done:true},{t:"API integration",done:true},{t:"Beta test",done:true},{t:"Store submission",done:false}
-      ], notes:"In attesa di review Apple."},
+      deadline:daysAgo(-30), tasks:[{t:"UI kit",done:true},{t:"API",done:true},{t:"Beta test",done:true},{t:"Store",done:false}], notes:""},
     { id:NEXA.Utils.uid("p"), name:"Campagna Q4", client:"Delta Consulting", progress:25, priority:"low",
-      deadline: daysAgo(-60), tasks:[
-        {t:"Briefing",done:true},{t:"Creatività",done:false},{t:"Media plan",done:false}
-      ], notes:"Kickoff fissato."},
+      deadline:daysAgo(-60), tasks:[{t:"Briefing",done:true},{t:"Creatività",done:false},{t:"Media plan",done:false}], notes:""},
     { id:NEXA.Utils.uid("p"), name:"ERP integration", client:"Epsilon Labs", progress:55, priority:"high",
-      deadline: daysAgo(-21), tasks:[
-        {t:"Mappatura API",done:true},{t:"Modulo ordini",done:true},{t:"Modulo magazzino",done:false},{t:"Test E2E",done:false}
-      ], notes:""},
+      deadline:daysAgo(-21), tasks:[{t:"API mapping",done:true},{t:"Ordini",done:true},{t:"Magazzino",done:false},{t:"E2E test",done:false}], notes:""},
     { id:NEXA.Utils.uid("p"), name:"Branding Zeta", client:"Zeta Partners", progress:90, priority:"medium",
-      deadline: daysAgo(-3), tasks:[
-        {t:"Logo",done:true},{t:"Palette",done:true},{t:"Brand book",done:true},{t:"Handoff",done:false}
-      ], notes:""}
+      deadline:daysAgo(-3), tasks:[{t:"Logo",done:true},{t:"Palette",done:true},{t:"Brand book",done:true},{t:"Handoff",done:false}], notes:""}
   ];
 
   const apply = () => {
@@ -1375,20 +1395,19 @@ NEXA.Seed = (() => {
       s.projects = genProjects();
       s.activity = [
         {id:NEXA.Utils.uid("a"), ts:daysAgo(0), text:"Progetto 'Redesign portale Alpha' avanzato al 68%"},
-        {id:NEXA.Utils.uid("a"), ts:daysAgo(1), text:"Nuovo cliente aggiunto: Theta Group"},
-        {id:NEXA.Utils.uid("a"), ts:daysAgo(2), text:"Registrata entrata € 8.400 da Consulenza Alpha"},
+        {id:NEXA.Utils.uid("a"), ts:daysAgo(1), text:"Nuovo cliente: Theta Group"},
+        {id:NEXA.Utils.uid("a"), ts:daysAgo(2), text:"Entrata € 8.400 da Consulenza Alpha"},
         {id:NEXA.Utils.uid("a"), ts:daysAgo(3), text:"Scadenza 'Migrazione cloud Beta' tra 7 giorni"},
-        {id:NEXA.Utils.uid("a"), ts:daysAgo(5), text:"Budget Marketing utilizzato all'82%"}
+        {id:NEXA.Utils.uid("a"), ts:daysAgo(5), text:"Budget Marketing all'82%"}
       ];
       return s;
     });
   };
-
   return Object.freeze({needsSeed, apply});
 })();
 
 /* =========================================================
-   [10] NEXA.Export — CSV / PDF / JSON
+   [10] Export
    ========================================================= */
 NEXA.Export = (() => {
   const downloadBlob = (content, filename, mime) => {
@@ -1406,27 +1425,21 @@ NEXA.Export = (() => {
       return false;
     }
   };
-
   const csvEscape = (v) => {
     const s = String(v==null?"":v);
     return /[",\n;]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s;
   };
-
   const expensesCSV = () => {
     const s = NEXA.Storage.load();
     const head = ["Data","Descrizione","Categoria","Tipo","Importo"];
-    const rows = s.expenses.map(e => [
-      NEXA.Utils.fmtDate(e.date), e.desc, e.category, e.type, e.amount
-    ]);
+    const rows = s.expenses.map(e => [NEXA.Utils.fmtDate(e.date), e.desc, e.category, e.type, e.amount]);
     const csv = [head, ...rows].map(r => r.map(csvEscape).join(",")).join("\n");
     const fname = `nexa-spese-${new Date().toISOString().slice(0,10)}.csv`;
     if (downloadBlob(csv, fname, "text/csv;charset=utf-8")) {
       NEXA.UI.toast({type:"success", title:"CSV esportato", msg:fname});
     }
   };
-
   const expensesPDF = () => {
-    // Strategia: apre finestra formattata e invoca print → "Salva come PDF"
     const s = NEXA.Storage.load();
     const inc = s.expenses.filter(e=>e.type==="income").reduce((a,e)=>a+e.amount,0);
     const exp = s.expenses.filter(e=>e.type==="expense").reduce((a,e)=>a+e.amount,0);
@@ -1438,20 +1451,17 @@ NEXA.Export = (() => {
         <td>${e.type==="income"?"Entrata":"Uscita"}</td>
         <td style="text-align:right">${NEXA.Utils.fmtEUR(e.amount)}</td>
       </tr>`).join("");
-
     const html = `<!doctype html><html><head><meta charset="utf-8"><title>NEXA — Report Spese</title>
       <style>
         body{font-family:Inter,system-ui,sans-serif;padding:40px;color:#0a0f1c}
-        h1{margin:0 0 4px;font-size:22px}
-        .sub{color:#555;font-size:12px;margin-bottom:24px}
+        h1{margin:0 0 4px;font-size:22px} .sub{color:#555;font-size:12px;margin-bottom:24px}
         table{width:100%;border-collapse:collapse;font-size:12px}
         th,td{padding:8px 10px;border-bottom:1px solid #ddd;text-align:left}
         th{background:#f2f4fa;font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.1em}
         .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
         .kpi{padding:14px;border:1px solid #ddd;border-radius:8px}
         .kpi b{display:block;font-size:18px;margin-top:4px}
-      </style>
-      </head><body>
+      </style></head><body>
       <h1>NEXA Business Core — Report Spese</h1>
       <div class="sub">Generato il ${new Date().toLocaleString("it-IT")}</div>
       <div class="kpis">
@@ -1459,19 +1469,15 @@ NEXA.Export = (() => {
         <div class="kpi">Uscite totali<b>${NEXA.Utils.fmtEUR(exp)}</b></div>
         <div class="kpi">Profitto<b>${NEXA.Utils.fmtEUR(inc-exp)}</b></div>
       </div>
-      <table>
-        <thead><tr><th>Data</th><th>Descrizione</th><th>Categoria</th><th>Tipo</th><th style="text-align:right">Importo</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
+      <table><thead><tr><th>Data</th><th>Descrizione</th><th>Categoria</th><th>Tipo</th><th style="text-align:right">Importo</th></tr></thead>
+      <tbody>${rows}</tbody></table>
       <script>window.onload=()=>{setTimeout(()=>window.print(),300)}<\/script>
       </body></html>`;
-
     const w = window.open("", "_blank", "width=900,height=700");
     if (!w) { NEXA.UI.toast({type:"error",title:"Popup bloccato",msg:"Consenti i popup per esportare PDF"}); return; }
     w.document.write(html); w.document.close();
-    NEXA.UI.toast({type:"info", title:"PDF in preparazione", msg:"Usa 'Salva come PDF' nella finestra di stampa"});
+    NEXA.UI.toast({type:"info", title:"PDF in preparazione", msg:"Usa 'Salva come PDF'"});
   };
-
   const allJSON = () => {
     const data = NEXA.Storage.exportJSON();
     const fname = `nexa-backup-${new Date().toISOString().slice(0,10)}.json`;
@@ -1479,28 +1485,21 @@ NEXA.Export = (() => {
       NEXA.UI.toast({type:"success", title:"Backup JSON", msg:fname});
     }
   };
-
   const importJSONFile = (file) => {
     const r = new FileReader();
-    r.onload = () => {
-      if (NEXA.Storage.importJSON(r.result)) {
-        NEXA.UI.toast({type:"success", title:"Import completato", msg:"Dati ricaricati"});
-      }
-    };
+    r.onload = () => { if (NEXA.Storage.importJSON(r.result)) NEXA.UI.toast({type:"success", title:"Import completato", msg:""}); };
     r.onerror = () => NEXA.UI.toast({type:"error", title:"Lettura file fallita", msg:""});
     r.readAsText(file);
   };
-
   return Object.freeze({expensesCSV, expensesPDF, allJSON, importJSONFile});
 })();
 
 /* =========================================================
-   [11] NEXA.Charts — Grafici canvas custom (zero dipendenze)
+   [11] Charts
    ========================================================= */
 NEXA.Charts = (() => {
   const COLORS = ["#6ea8ff","#8b5cf6","#22d3ee","#34d399","#fbbf24","#f87171","#fb7185","#a78bfa","#f472b6","#60a5fa"];
   const DPR = () => Math.max(1, window.devicePixelRatio || 1);
-
   const setupCanvas = (canvas) => {
     const rect = canvas.getBoundingClientRect();
     const dpr = DPR();
@@ -1510,30 +1509,22 @@ NEXA.Charts = (() => {
     ctx.setTransform(dpr,0,0,dpr,0,0);
     return { ctx, w: rect.width, h: rect.height };
   };
-
   const styleOf = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-  /* ---------- LINE / AREA CHART ---------- */
   const lineChart = (canvas, {series=[], labels=[], fill=true, gridLines=5}) => {
     if (!canvas) return;
     const {ctx, w, h} = setupCanvas(canvas);
     ctx.clearRect(0,0,w,h);
     const pad = {l:40, r:16, t:14, b:28};
-    const iw = w - pad.l - pad.r;
-    const ih = h - pad.t - pad.b;
-
-    // compute y-range across all series
+    const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
     let min = Infinity, max = -Infinity;
     series.forEach(s => s.data.forEach(v => { if (v<min) min=v; if (v>max) max=v; }));
     if (!isFinite(min)) { min = 0; max = 100; }
     if (min === max) { min -= 1; max += 1; }
     const range = max - min;
-
     const grid = styleOf("--border") || "#223";
     const textC = styleOf("--text-mute") || "#888";
     ctx.font = "10px Inter,system-ui";
-
-    // y grid
     for (let i=0;i<=gridLines;i++) {
       const y = pad.t + (ih * i / gridLines);
       const v = max - (range * i / gridLines);
@@ -1542,8 +1533,6 @@ NEXA.Charts = (() => {
       ctx.fillStyle = textC; ctx.textAlign = "right"; ctx.textBaseline = "middle";
       ctx.fillText(Math.round(v).toLocaleString("it-IT"), pad.l-8, y);
     }
-
-    // x labels
     const n = Math.max(2, labels.length);
     const stepX = iw / (n-1);
     ctx.fillStyle = textC; ctx.textAlign = "center"; ctx.textBaseline = "top";
@@ -1551,8 +1540,6 @@ NEXA.Charts = (() => {
       const x = pad.l + i*stepX;
       if (i % Math.max(1, Math.floor(n/8)) === 0) ctx.fillText(lb, x, pad.t+ih+8);
     });
-
-    // series
     series.forEach((s, si) => {
       const color = s.color || COLORS[si % COLORS.length];
       ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.lineJoin = "round";
@@ -1563,18 +1550,14 @@ NEXA.Charts = (() => {
         if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
       });
       ctx.stroke();
-
       if (fill) {
         ctx.lineTo(pad.l + (s.data.length-1)*stepX, pad.t+ih);
         ctx.lineTo(pad.l, pad.t+ih);
         ctx.closePath();
         const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t+ih);
-        grad.addColorStop(0, color + "55");
-        grad.addColorStop(1, color + "00");
+        grad.addColorStop(0, color + "55"); grad.addColorStop(1, color + "00");
         ctx.fillStyle = grad; ctx.fill();
       }
-
-      // points
       s.data.forEach((v, i) => {
         const x = pad.l + i*stepX;
         const y = pad.t + ih - ((v - min) / range) * ih;
@@ -1584,19 +1567,16 @@ NEXA.Charts = (() => {
     });
   };
 
-  /* ---------- BAR CHART ---------- */
   const barChart = (canvas, {labels=[], data=[], colors=[]}) => {
     if (!canvas) return;
     const {ctx, w, h} = setupCanvas(canvas);
     ctx.clearRect(0,0,w,h);
     const pad = {l:40, r:16, t:14, b:32};
-    const iw = w - pad.l - pad.r;
-    const ih = h - pad.t - pad.b;
+    const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
     const max = Math.max(1, ...data);
     const grid = styleOf("--border") || "#223";
     const textC = styleOf("--text-mute") || "#888";
     ctx.font = "10px Inter,system-ui";
-
     for (let i=0;i<=4;i++) {
       const y = pad.t + (ih * i / 4);
       const v = max - (max * i / 4);
@@ -1604,7 +1584,6 @@ NEXA.Charts = (() => {
       ctx.fillStyle = textC; ctx.textAlign = "right"; ctx.textBaseline = "middle";
       ctx.fillText(Math.round(v).toLocaleString("it-IT"), pad.l-8, y);
     }
-
     const n = Math.max(1, data.length);
     const gap = 8;
     const bw = (iw - gap*(n-1)) / n;
@@ -1623,22 +1602,17 @@ NEXA.Charts = (() => {
     });
   };
 
-  /* ---------- DOUGHNUT ---------- */
   const doughnut = (canvas, {labels=[], data=[], colors=[]}) => {
     if (!canvas) return;
     const {ctx, w, h} = setupCanvas(canvas);
     ctx.clearRect(0,0,w,h);
     const total = data.reduce((a,b)=>a+b,0) || 1;
     const cx = w*0.36, cy = h/2;
-    const r = Math.min(cx, cy) - 10;
-    const ri = r * 0.62;
+    const r = Math.min(cx, cy) - 10, ri = r * 0.62;
     let start = -Math.PI/2;
     data.forEach((v, i) => {
       const slice = (v/total) * Math.PI*2;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.arc(cx, cy, r, start, start+slice);
-      ctx.closePath();
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, start, start+slice); ctx.closePath();
       ctx.fillStyle = colors[i] || COLORS[i % COLORS.length];
       ctx.fill();
       start += slice;
@@ -1651,8 +1625,6 @@ NEXA.Charts = (() => {
     ctx.fillText(NEXA.Utils.fmtNum(total), cx, cy-6);
     ctx.font = "11px Inter,system-ui"; ctx.fillStyle = styleOf("--text-dim") || "#999";
     ctx.fillText("totale", cx, cy+14);
-
-    // legend
     ctx.textAlign = "left"; ctx.textBaseline = "middle";
     const lx = w*0.68;
     let ly = 24;
@@ -1670,19 +1642,16 @@ NEXA.Charts = (() => {
     });
   };
 
-  /* ---------- HORIZONTAL BAR ---------- */
   const hBar = (canvas, {labels=[], data=[], colors=[]}) => {
     if (!canvas) return;
     const {ctx, w, h} = setupCanvas(canvas);
     ctx.clearRect(0,0,w,h);
     const pad = {l:110, r:16, t:10, b:10};
-    const iw = w - pad.l - pad.r;
-    const ih = h - pad.t - pad.b;
+    const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
     const max = Math.max(1, ...data);
     const n = Math.max(1, data.length);
     const gap = 10;
     const bh = (ih - gap*(n-1)) / n;
-
     data.forEach((v, i) => {
       const y = pad.t + i*(bh+gap);
       const bw = (v/max) * iw;
@@ -1716,33 +1685,27 @@ NEXA.Charts = (() => {
 })();
 
 /* =========================================================
-   [12] NEXA.AnalyticsModel — Derivazioni aggregate dallo stato
+   [12] AnalyticsModel
    ========================================================= */
 NEXA.AnalyticsModel = (() => {
   const monthKey = (iso) => {
     const d = new Date(iso);
     return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0");
   };
-
   const kpis = (state) => {
     const now = new Date();
     const thisMonth = monthKey(now.toISOString());
     const lastMonth = monthKey(new Date(now.getFullYear(), now.getMonth()-1, 1).toISOString());
-
     const sumByMonth = (type, mk) => state.expenses
       .filter(e => e.type === type && monthKey(e.date) === mk)
       .reduce((a,e) => a + e.amount, 0);
-
     const income  = sumByMonth("income",  thisMonth);
     const expense = sumByMonth("expense", thisMonth);
     const profit  = income - expense;
-
     const incomeL  = sumByMonth("income",  lastMonth);
     const expenseL = sumByMonth("expense", lastMonth);
     const profitL  = incomeL - expenseL;
-
     const growth = profitL !== 0 ? ((profit - profitL) / Math.abs(profitL)) * 100 : 0;
-
     return {
       income, expense, profit, growth,
       clients: state.clients.length,
@@ -1752,12 +1715,9 @@ NEXA.AnalyticsModel = (() => {
       avgTicket: income > 0 ? income / Math.max(1, state.expenses.filter(e => e.type==="income" && monthKey(e.date)===thisMonth).length) : 0
     };
   };
-
   const monthlyCashflow = (state, months=12) => {
     const now = new Date();
-    const labels = [];
-    const income = [];
-    const expense = [];
+    const labels = [], income = [], expense = [];
     for (let i=months-1; i>=0; i--) {
       const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
       const k = monthKey(d.toISOString());
@@ -1767,14 +1727,12 @@ NEXA.AnalyticsModel = (() => {
     }
     return { labels, income, expense, profit: income.map((v,i)=>v-expense[i]) };
   };
-
   const categoryBreakdown = (state, type="expense") => {
     const map = {};
     state.expenses.filter(e => e.type === type).forEach(e => { map[e.category] = (map[e.category]||0) + e.amount; });
     const entries = Object.entries(map).sort((a,b)=>b[1]-a[1]);
     return { labels: entries.map(e=>e[0]), data: entries.map(e=>e[1]) };
   };
-
   const dailyFlow30 = (state) => {
     const labels = [], data = [];
     for (let i=29;i>=0;i--) {
@@ -1787,9 +1745,7 @@ NEXA.AnalyticsModel = (() => {
     }
     return {labels, data};
   };
-
   const heatmapData = (state, weeks=4) => {
-    // 7 giorni × 24 ore
     const grid = Array.from({length:7}, ()=>Array.from({length:24}, ()=>0));
     const cutoff = Date.now() - weeks*7*86400000;
     state.expenses.forEach(e => {
@@ -1800,48 +1756,50 @@ NEXA.AnalyticsModel = (() => {
     });
     return grid;
   };
-
   const clientStatusDistribution = (state) => {
     const m = { lead:0, active:0, paused:0, closed:0 };
     state.clients.forEach(c => { if (m[c.status] !== undefined) m[c.status]++; });
-    return {
-      labels: Object.keys(m).map(k => NEXA.Config.STATUS_LABELS[k]),
-      data: Object.values(m)
-    };
+    return { labels: Object.keys(m).map(k => NEXA.Config.STATUS_LABELS[k]), data: Object.values(m) };
   };
-
   const priorityLoad = (state) => {
     const m = { low:0, medium:0, high:0, critical:0 };
     state.projects.forEach(p => { if (m[p.priority] !== undefined) m[p.priority]++; });
-    return {
-      labels: Object.keys(m).map(k => NEXA.Config.PRIORITY_LABELS[k]),
-      data: Object.values(m)
-    };
+    return { labels: Object.keys(m).map(k => NEXA.Config.PRIORITY_LABELS[k]), data: Object.values(m) };
   };
-
-  return Object.freeze({kpis, monthlyCashflow, categoryBreakdown, dailyFlow30, heatmapData, clientStatusDistribution, priorityLoad});
+  // Context dump per AI
+  const contextSummary = (state) => {
+    const k = kpis(state);
+    const cat = categoryBreakdown(state, "expense");
+    const topCats = cat.labels.slice(0,5).map((l,i)=>`${l}: €${cat.data[i]}`).join(", ");
+    const overdue = state.projects.filter(p => p.progress<100 && new Date(p.deadline) < new Date()).length;
+    return [
+      `KPI mese: entrate €${k.income}, uscite €${k.expense}, profitto €${k.profit} (${k.growth.toFixed(1)}% MoM)`,
+      `Clienti: ${k.clients} totali, ${k.activeClients} attivi`,
+      `Progetti: ${k.projects} totali, ${k.activeProjects} in corso, ${overdue} in ritardo`,
+      `Top categorie spesa: ${topCats||"nessuna"}`
+    ].join("\n");
+  };
+  return Object.freeze({kpis, monthlyCashflow, categoryBreakdown, dailyFlow30, heatmapData, clientStatusDistribution, priorityLoad, contextSummary});
 })();
 
 /* =========================================================
-   [13] NEXA.Dashboard — Rendering vista dashboard
+   [13] Dashboard
    ========================================================= */
 NEXA.Dashboard = (() => {
   const kpiGrid = document.getElementById("kpiGrid");
   const activityList = document.getElementById("activityList");
   const upcomingList = document.getElementById("upcomingList");
   const dashInsight = document.getElementById("dashInsight");
-
   const icons = {
-    income:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>',
-    expense: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>',
-    profit:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 6-6"/></svg>',
-    clients: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>'
+    income:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>',
+    expense:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>',
+    profit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 6-6"/></svg>',
+    clients:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>'
   };
-
   const renderKpis = (k) => {
     const items = [
       {label:"Entrate (mese)",  value:NEXA.Utils.fmtEUR(k.income),   trend:`+${Math.max(0,k.growth).toFixed(1)}%`, up:k.growth>=0, icon:icons.income},
-      {label:"Uscite (mese)",   value:NEXA.Utils.fmtEUR(k.expense),  trend:`${k.expense>0?"":"—"}${NEXA.Utils.fmtEUR(k.expense)}`, up:false, icon:icons.expense},
+      {label:"Uscite (mese)",   value:NEXA.Utils.fmtEUR(k.expense),  trend:`${NEXA.Utils.fmtEUR(k.expense)}`, up:false, icon:icons.expense},
       {label:"Profitto netto",  value:NEXA.Utils.fmtEUR(k.profit),   trend:`${k.growth>=0?"▲":"▼"} ${Math.abs(k.growth).toFixed(1)}%`, up:k.growth>=0, icon:icons.profit},
       {label:"Clienti attivi",  value:NEXA.Utils.fmtNum(k.activeClients), trend:`${k.clients} totali`, up:true, icon:icons.clients}
     ];
@@ -1853,7 +1811,6 @@ NEXA.Dashboard = (() => {
         <span class="trend ${it.up?'up':'down'}">${it.trend}</span>
       </div>`).join("");
   };
-
   const renderActivity = (state) => {
     const rows = state.activity.slice(-6).reverse();
     activityList.innerHTML = rows.length ? rows.map(a => `
@@ -1863,16 +1820,13 @@ NEXA.Dashboard = (() => {
           <div>${NEXA.Utils.escapeHTML(a.text)}</div>
           <div style="font-size:11px;color:var(--text-mute);margin-top:2px">${NEXA.Utils.fmtDateTime(a.ts)}</div>
         </div>
-      </li>`).join("") : `<li class="empty"><p>Nessuna attività recente</p></li>`;
+      </li>`).join("") : `<li class="empty"><p>Nessuna attività</p></li>`;
   };
-
   const renderUpcoming = (state) => {
     const now = new Date();
-    const upcoming = state.projects
-      .filter(p => p.progress < 100)
+    const upcoming = state.projects.filter(p => p.progress < 100)
       .map(p => ({...p, daysLeft: NEXA.Utils.daysBetween(now.toISOString(), p.deadline)}))
-      .sort((a,b)=>a.daysLeft-b.daysLeft)
-      .slice(0,5);
+      .sort((a,b)=>a.daysLeft-b.daysLeft).slice(0,5);
     upcomingList.innerHTML = upcoming.length ? upcoming.map(p => {
       const urgent = p.daysLeft < 7;
       return `
@@ -1883,50 +1837,39 @@ NEXA.Dashboard = (() => {
         </div>
         <span class="tag ${urgent?'red':'blue'}">${p.daysLeft<0?"scaduto":("tra "+p.daysLeft+"g")}</span>
       </li>`;
-    }).join("") : `<li class="empty"><p>Nessuna scadenza imminente</p></li>`;
+    }).join("") : `<li class="empty"><p>Nessuna scadenza</p></li>`;
   };
-
   const renderInsight = (state, k) => {
     const tips = [];
-    if (k.growth < 0) tips.push("⚠️ Il profitto è in calo rispetto al mese scorso: rivedi le spese ricorrenti.");
-    else tips.push("✅ Profitto in crescita: considera di reinvestire in marketing.");
+    if (k.growth < 0) tips.push("⚠️ Il profitto è in calo: rivedi spese ricorrenti.");
+    else tips.push("✅ Profitto in crescita: considera reinvestimenti.");
     const topCat = NEXA.AnalyticsModel.categoryBreakdown(state, "expense");
-    if (topCat.labels[0]) tips.push(`💡 La categoria più costosa è <b>${topCat.labels[0]}</b> (${NEXA.Utils.fmtEUR(topCat.data[0])}).`);
-    if (k.activeClients < 3) tips.push("👥 Pochi clienti attivi: pianifica azioni di lead generation.");
-    if (state.projects.filter(p=>p.priority==="critical"&&p.progress<50).length) tips.push("🔥 Hai progetti critici sotto il 50%: prioritali questa settimana.");
+    if (topCat.labels[0]) tips.push(`💡 Top spesa: <b>${topCat.labels[0]}</b> (${NEXA.Utils.fmtEUR(topCat.data[0])}).`);
+    if (k.activeClients < 3) tips.push("👥 Pochi clienti attivi: lead generation.");
+    if (state.projects.filter(p=>p.priority==="critical"&&p.progress<50).length) tips.push("🔥 Progetti critici sotto 50%.");
     dashInsight.innerHTML = tips.map(t => `<p style="margin-bottom:10px">${t}</p>`).join("");
   };
-
   const renderCharts = (state) => {
     const cf = NEXA.AnalyticsModel.monthlyCashflow(state, 12);
     NEXA.Charts.lineChart(document.getElementById("chartCashflow"), {
       labels: cf.labels,
-      series: [
-        { data: cf.income,  color: "#6ea8ff" },
-        { data: cf.expense, color: "#f87171" }
-      ]
+      series: [{ data: cf.income, color: "#6ea8ff" }, { data: cf.expense, color: "#f87171" }]
     });
     const cat = NEXA.AnalyticsModel.categoryBreakdown(state, "expense");
     NEXA.Charts.doughnut(document.getElementById("chartCategory"), {
       labels: cat.labels.slice(0,6), data: cat.data.slice(0,6)
     });
   };
-
   const render = () => {
     const s = NEXA.Storage.load();
     const k = NEXA.AnalyticsModel.kpis(s);
-    renderKpis(k);
-    renderActivity(s);
-    renderUpcoming(s);
-    renderInsight(s, k);
-    renderCharts(s);
+    renderKpis(k); renderActivity(s); renderUpcoming(s); renderInsight(s, k); renderCharts(s);
   };
-
   return Object.freeze({render});
 })();
 
 /* =========================================================
-   [14] NEXA.Expenses — Modulo spese con CRUD
+   [14] Expenses
    ========================================================= */
 NEXA.Expenses = (() => {
   const kpiHost  = document.getElementById("expKpis");
@@ -1934,15 +1877,11 @@ NEXA.Expenses = (() => {
   const searchEl = document.getElementById("expSearch");
   const filterEl = document.getElementById("expFilter");
   const budgetBars = document.getElementById("budgetBars");
-
-  let query = "";
-  let filter = "all";
-
+  let query = "", filter = "all";
   const currentMonthKey = () => {
     const d = new Date();
     return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");
   };
-
   const renderKpis = (state) => {
     const mk = currentMonthKey();
     const month = state.expenses.filter(e => e.date.slice(0,7) === mk);
@@ -1962,16 +1901,13 @@ NEXA.Expenses = (() => {
         <span class="trend ${it.up?'up':'down'}">${it.trend}</span>
       </div>`).join("");
   };
-
   const renderTable = (state) => {
     let rows = state.expenses.slice();
     if (filter !== "all") rows = rows.filter(r => r.type === filter);
-    if (query.trim()) rows = rows.filter(r =>
-      NEXA.Utils.fuzzy(query, r.desc) || NEXA.Utils.fuzzy(query, r.category)
-    );
+    if (query.trim()) rows = rows.filter(r => NEXA.Utils.fuzzy(query, r.desc) || NEXA.Utils.fuzzy(query, r.category));
     rows.sort((a,b) => new Date(b.date) - new Date(a.date));
     if (rows.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6"><div class="empty"><h4>Nessuna transazione</h4><p>Prova a cambiare filtri o aggiungi una voce.</p></div></td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6"><div class="empty"><h4>Nessuna transazione</h4></div></td></tr>`;
       return;
     }
     tbody.innerHTML = rows.slice(0, 200).map(e => `
@@ -1982,20 +1918,17 @@ NEXA.Expenses = (() => {
         <td><span class="tag ${e.type==='income'?'green':'red'}">${e.type==='income'?'Entrata':'Uscita'}</span></td>
         <td style="text-align:right;font-weight:600;color:${e.type==='income'?'var(--success)':'var(--text)'}">${e.type==='income'?'+':'−'} ${NEXA.Utils.fmtEUR(e.amount).replace("€","€ ")}</td>
         <td><div class="row-actions">
-          <button class="icon-btn" data-del="${e.id}" title="Elimina">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-          </button>
+          <button class="icon-btn" data-del="${e.id}" title="Elimina"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
         </div></td>
       </tr>`).join("");
   };
-
   const renderBudgetBars = (state) => {
     const mk = currentMonthKey();
     const spent = {};
     state.expenses.filter(e => e.type==="expense" && e.date.slice(0,7)===mk).forEach(e => {
       spent[e.category] = (spent[e.category]||0) + e.amount;
     });
-    const rows = NEXA.Config.CATEGORIES.map(cat => {
+    budgetBars.innerHTML = NEXA.Config.CATEGORIES.map(cat => {
       const b = state.budgets[cat] || 0;
       const s = spent[cat] || 0;
       const pct = b > 0 ? Math.min(100, Math.round((s/b)*100)) : 0;
@@ -2009,25 +1942,17 @@ NEXA.Expenses = (() => {
           <div class="progress"><i style="width:${pct}%;background:${color}"></i></div>
         </div>`;
     }).join("");
-    budgetBars.innerHTML = rows;
   };
-
   const renderChart30 = (state) => {
     const d = NEXA.AnalyticsModel.dailyFlow30(state);
     NEXA.Charts.lineChart(document.getElementById("chartExp30"), {
-      labels: d.labels,
-      series: [{ data: d.data, color: "#8b5cf6" }]
+      labels: d.labels, series: [{ data: d.data, color: "#8b5cf6" }]
     });
   };
-
   const render = () => {
     const s = NEXA.Storage.load();
-    renderKpis(s);
-    renderTable(s);
-    renderBudgetBars(s);
-    renderChart30(s);
+    renderKpis(s); renderTable(s); renderBudgetBars(s); renderChart30(s);
   };
-
   const openForm = (existing=null) => {
     const isEdit = !!existing;
     const e = existing || { id:"", date:new Date().toISOString().slice(0,10), desc:"", category:"Altro", type:"expense", amount:0 };
@@ -2051,7 +1976,6 @@ NEXA.Expenses = (() => {
       </div>`;
     NEXA.UI.openModal({
       title: isEdit ? "Modifica transazione" : "Nuova transazione",
-      lead:  isEdit ? "Aggiorna i campi e conferma." : "Compila i campi per registrare la voce.",
       bodyHTML: html,
       confirmText: isEdit ? "Salva" : "Aggiungi"
     }).then(ok => {
@@ -2061,23 +1985,17 @@ NEXA.Expenses = (() => {
       const desc = get("desc").trim();
       const amount = parseFloat(get("amount"));
       if (!desc) { NEXA.UI.toast({type:"warn",title:"Descrizione obbligatoria",msg:""}); return; }
-      if (!Number.isFinite(amount) || amount <= 0) { NEXA.UI.toast({type:"warn",title:"Importo non valido",msg:"Deve essere > 0"}); return; }
+      if (!Number.isFinite(amount) || amount <= 0) { NEXA.UI.toast({type:"warn",title:"Importo non valido",msg:""}); return; }
       const date = new Date(get("date")).toISOString();
       NEXA.Storage.update(s => {
-        const entry = {
-          id: e.id || NEXA.Utils.uid("e"),
-          date, desc,
-          category: get("category"),
-          type:     get("type"),
-          amount:   Math.round(amount)
-        };
+        const entry = { id: e.id || NEXA.Utils.uid("e"), date, desc, category:get("category"), type:get("type"), amount:Math.round(amount) };
         if (isEdit) {
           const i = s.expenses.findIndex(x => x.id === e.id);
           if (i >= 0) s.expenses[i] = entry;
         } else {
           s.expenses.unshift(entry);
           s.activity.push({id:NEXA.Utils.uid("a"), ts:new Date().toISOString(),
-            text:`${entry.type==='income'?'Entrata':'Uscita'} registrata: ${entry.desc} · ${NEXA.Utils.fmtEUR(entry.amount)}`});
+            text:`${entry.type==='income'?'Entrata':'Uscita'}: ${entry.desc} · ${NEXA.Utils.fmtEUR(entry.amount)}`});
         }
         return s;
       });
@@ -2086,7 +2004,6 @@ NEXA.Expenses = (() => {
       NEXA.EventBus.emit("expenses:changed");
     });
   };
-
   const bind = () => {
     searchEl.addEventListener("input", NEXA.Utils.debounce(e => { query = e.target.value; renderTable(NEXA.Storage.load()); }, 150));
     filterEl.addEventListener("change", e => { filter = e.target.value; renderTable(NEXA.Storage.load()); });
@@ -2095,23 +2012,21 @@ NEXA.Expenses = (() => {
       const btn = e.target.closest("[data-del]");
       if (!btn) return;
       const id = btn.dataset.del;
-      NEXA.UI.confirm("Eliminare transazione?", "L'operazione è irreversibile.").then(ok => {
+      NEXA.UI.confirm("Eliminare transazione?", "Operazione irreversibile.").then(ok => {
         if (!ok) return;
         NEXA.Storage.update(s => { s.expenses = s.expenses.filter(x => x.id !== id); return s; });
         NEXA.UI.toast({type:"info", title:"Eliminata", msg:""});
         render();
-        NEXA.EventBus.emit("expenses:changed");
       });
     });
     document.querySelector("[data-export='csv']").addEventListener("click", NEXA.Export.expensesCSV);
     document.querySelector("[data-export='pdf']").addEventListener("click", NEXA.Export.expensesPDF);
   };
-
   return Object.freeze({render, bind, openForm});
 })();
 
 /* =========================================================
-   [15] NEXA.Clients — CRM semplice
+   [15] Clients
    ========================================================= */
 NEXA.Clients = (() => {
   const tbody    = document.querySelector("#cliTable tbody");
@@ -2119,14 +2034,11 @@ NEXA.Clients = (() => {
   const filterEl = document.getElementById("cliFilter");
   const topHost  = document.getElementById("topClients");
   const notesBox = document.getElementById("cliNotes");
-
   let query = "", filter = "all";
-
   const statusTag = (s) => {
     const map = { lead:"blue", active:"green", paused:"yellow", closed:"gray" };
     return `<span class="tag ${map[s]||'gray'}">${NEXA.Config.STATUS_LABELS[s]||s}</span>`;
   };
-
   const renderTable = (state) => {
     let rows = state.clients.slice();
     if (filter !== "all") rows = rows.filter(r => r.status === filter);
@@ -2135,7 +2047,7 @@ NEXA.Clients = (() => {
     );
     rows.sort((a,b) => new Date(b.lastContact) - new Date(a.lastContact));
     if (rows.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6"><div class="empty"><h4>Nessun cliente</h4><p>Aggiungi il primo cliente per iniziare.</p></div></td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6"><div class="empty"><h4>Nessun cliente</h4></div></td></tr>`;
       return;
     }
     tbody.innerHTML = rows.map(c => `
@@ -2162,7 +2074,6 @@ NEXA.Clients = (() => {
         </div></td>
       </tr>`).join("");
   };
-
   const renderSide = (state) => {
     const top = state.clients.slice().sort((a,b)=>b.value-a.value).slice(0,5);
     topHost.innerHTML = top.length ? top.map(c => `
@@ -2173,23 +2084,18 @@ NEXA.Clients = (() => {
         </div>
         <span style="color:var(--accent);font-weight:600">${NEXA.Utils.fmtEUR(c.value)}</span>
       </li>`).join("") : `<li class="empty"><p>—</p></li>`;
-
     const withNotes = state.clients.filter(c => (c.notes||"").trim()).slice(0,3);
     notesBox.innerHTML = withNotes.length ? withNotes.map(c => `
       <div style="padding:10px 0;border-bottom:1px solid var(--border)">
         <div style="font-weight:500;font-size:12px;margin-bottom:3px">${NEXA.Utils.escapeHTML(c.name)}</div>
         <div style="font-size:12px;color:var(--text-dim)">${NEXA.Utils.escapeHTML(c.notes)}</div>
-      </div>`).join("") : `<p style="font-size:13px;color:var(--text-dim)">Nessuna nota disponibile.</p>`;
-
+      </div>`).join("") : `<p style="font-size:13px;color:var(--text-dim)">Nessuna nota.</p>`;
     NEXA.Charts.doughnut(document.getElementById("chartCliStatus"), NEXA.AnalyticsModel.clientStatusDistribution(state));
   };
-
   const render = () => {
     const s = NEXA.Storage.load();
-    renderTable(s);
-    renderSide(s);
+    renderTable(s); renderSide(s);
   };
-
   const openForm = (existing=null) => {
     const isEdit = !!existing;
     const c = existing || { id:"", name:"", company:"", email:"", phone:"", status:"lead", value:0, notes:"", lastContact:new Date().toISOString(), createdAt:new Date().toISOString() };
@@ -2208,12 +2114,10 @@ NEXA.Clients = (() => {
         <div class="field"><label>Valore stimato (€)</label><input name="value" type="number" min="0" value="${c.value||0}" /></div>
       </div>
       <div class="form-row full">
-        <div class="field"><label>Note</label><textarea name="notes" placeholder="Dettagli, contesto, follow-up...">${NEXA.Utils.escapeHTML(c.notes||"")}</textarea></div>
+        <div class="field"><label>Note</label><textarea name="notes" placeholder="Dettagli...">${NEXA.Utils.escapeHTML(c.notes||"")}</textarea></div>
       </div>`;
     NEXA.UI.openModal({
-      title: isEdit ? "Modifica cliente" : "Nuovo cliente",
-      bodyHTML: html,
-      confirmText: isEdit ? "Salva" : "Aggiungi"
+      title: isEdit ? "Modifica cliente" : "Nuovo cliente", bodyHTML: html, confirmText: isEdit ? "Salva" : "Aggiungi"
     }).then(ok => {
       if (!ok) return;
       const f = document.querySelector("#modalBody");
@@ -2242,10 +2146,8 @@ NEXA.Clients = (() => {
       });
       NEXA.UI.toast({type:"success", title:isEdit?"Aggiornato":"Cliente aggiunto", msg:name});
       render();
-      NEXA.EventBus.emit("clients:changed");
     });
   };
-
   const bind = () => {
     searchEl.addEventListener("input", NEXA.Utils.debounce(e => { query = e.target.value; renderTable(NEXA.Storage.load()); }, 150));
     filterEl.addEventListener("change", e => { filter = e.target.value; renderTable(NEXA.Storage.load()); });
@@ -2258,7 +2160,7 @@ NEXA.Clients = (() => {
         const c = state.clients.find(x => x.id === edit.dataset.edit);
         if (c) openForm(c);
       } else if (del) {
-        NEXA.UI.confirm("Eliminare cliente?", "Verranno mantenute transazioni collegate.").then(ok => {
+        NEXA.UI.confirm("Eliminare cliente?", "").then(ok => {
           if (!ok) return;
           NEXA.Storage.update(s => { s.clients = s.clients.filter(x => x.id !== del.dataset.del); return s; });
           NEXA.UI.toast({type:"info", title:"Cliente eliminato", msg:""});
@@ -2267,19 +2169,16 @@ NEXA.Clients = (() => {
       }
     });
   };
-
   return Object.freeze({render, bind, openForm});
 })();
 
 /* =========================================================
-   [16] NEXA.Projects — Project tracker
+   [16] Projects
    ========================================================= */
 NEXA.Projects = (() => {
   const host = document.getElementById("projectList");
   const kpiHost = document.getElementById("prjKpis");
-
   const prioColor = { low:"blue", medium:"purple", high:"yellow", critical:"red" };
-
   const renderKpis = (state) => {
     const active = state.projects.filter(p => p.progress < 100);
     const done   = state.projects.filter(p => p.progress >= 100);
@@ -2298,10 +2197,9 @@ NEXA.Projects = (() => {
         <span class="trend ${it.up===false?'down':'up'}">${it.trend}</span>
       </div>`).join("");
   };
-
   const renderList = (state) => {
     if (state.projects.length === 0) {
-      host.innerHTML = `<div class="empty" style="grid-column:1/-1"><h4>Nessun progetto</h4><p>Crea il primo progetto per tracciarne l'avanzamento.</p></div>`;
+      host.innerHTML = `<div class="empty" style="grid-column:1/-1"><h4>Nessun progetto</h4></div>`;
       return;
     }
     host.innerHTML = state.projects.map(p => {
@@ -2323,9 +2221,7 @@ NEXA.Projects = (() => {
         <div class="progress" style="margin-bottom:10px"><i style="width:${p.progress}%"></i></div>
         <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-mute);margin-bottom:10px">
           <span>Scadenza: ${NEXA.Utils.fmtDate(p.deadline)}</span>
-          <span class="${overdue?'':''}">
-            ${p.progress>=100 ? "✓ completato" : (overdue?"<span style='color:var(--danger)'>scaduto</span>":("tra "+days+"g"))}
-          </span>
+          <span>${p.progress>=100 ? "✓ completato" : (overdue?"<span style='color:var(--danger)'>scaduto</span>":("tra "+days+"g"))}</span>
         </div>
         <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px">
           ${(p.tasks||[]).map(t => `
@@ -2341,22 +2237,16 @@ NEXA.Projects = (() => {
       </div>`;
     }).join("");
   };
-
   const renderChart = (state) => {
     const pl = NEXA.AnalyticsModel.priorityLoad(state);
     NEXA.Charts.barChart(document.getElementById("chartPriority"), {
-      labels: pl.labels, data: pl.data,
-      colors: ["#60a5fa","#a78bfa","#fbbf24","#f87171"]
+      labels: pl.labels, data: pl.data, colors: ["#60a5fa","#a78bfa","#fbbf24","#f87171"]
     });
   };
-
   const render = () => {
     const s = NEXA.Storage.load();
-    renderKpis(s);
-    renderList(s);
-    renderChart(s);
+    renderKpis(s); renderList(s); renderChart(s);
   };
-
   const openForm = (existing=null) => {
     const isEdit = !!existing;
     const p = existing || { id:"", name:"", client:"", progress:0, priority:"medium", deadline:new Date(Date.now()+30*86400000).toISOString().slice(0,10), tasks:[], notes:"" };
@@ -2382,7 +2272,7 @@ NEXA.Projects = (() => {
       </div>
       <div class="form-row">
         <div class="field"><label>Avanzamento (%)</label><input name="progress" type="number" min="0" max="100" value="${p.progress}" /></div>
-        <div class="field"><label>&nbsp;</label><div style="font-size:11px;color:var(--text-mute);padding-top:10px">Lascia 0-99 per progetti in corso, 100 per completati.</div></div>
+        <div class="field"><label>&nbsp;</label><div style="font-size:11px;color:var(--text-mute);padding-top:10px">0-99 in corso, 100 completato.</div></div>
       </div>
       <div class="form-row full">
         <div class="field">
@@ -2395,9 +2285,7 @@ NEXA.Projects = (() => {
         <div class="field"><label>Note</label><textarea name="notes">${NEXA.Utils.escapeHTML(p.notes||"")}</textarea></div>
       </div>`;
     NEXA.UI.openModal({
-      title: isEdit ? "Modifica progetto" : "Nuovo progetto",
-      bodyHTML: html,
-      confirmText: isEdit ? "Salva" : "Crea"
+      title: isEdit ? "Modifica progetto" : "Nuovo progetto", bodyHTML: html, confirmText: isEdit ? "Salva" : "Crea"
     }).then(ok => {
       if (!ok) return;
       const f = document.querySelector("#modalBody");
@@ -2427,10 +2315,7 @@ NEXA.Projects = (() => {
       });
       NEXA.UI.toast({type:"success", title:isEdit?"Aggiornato":"Progetto creato", msg:name});
       render();
-      NEXA.EventBus.emit("projects:changed");
     });
-
-    // sub-handler tasks
     const taskList = document.getElementById("taskList");
     const addTaskBtn = document.getElementById("addTaskBtn");
     const addTaskRow = () => {
@@ -2450,7 +2335,6 @@ NEXA.Projects = (() => {
       if (e.target.classList.contains("task-remove")) e.target.closest(".task-row").remove();
     });
   };
-
   const bind = () => {
     document.querySelector("[data-project-add]").addEventListener("click", () => openForm());
     host.addEventListener("click", (e) => {
@@ -2461,7 +2345,7 @@ NEXA.Projects = (() => {
         const p = state.projects.find(x => x.id === edit.dataset.edit);
         if (p) openForm(p);
       } else if (del) {
-        NEXA.UI.confirm("Eliminare progetto?", "Tutti i task andranno persi.").then(ok => {
+        NEXA.UI.confirm("Eliminare progetto?", "").then(ok => {
           if (!ok) return;
           NEXA.Storage.update(s => { s.projects = s.projects.filter(x => x.id !== del.dataset.del); return s; });
           NEXA.UI.toast({type:"info", title:"Progetto eliminato", msg:""});
@@ -2479,33 +2363,27 @@ NEXA.Projects = (() => {
         if (!p) return s;
         const t = p.tasks.find(x => x.t === tname);
         if (t) t.done = done;
-        // Auto-calc progress from tasks
-        if (p.tasks.length) {
-          p.progress = Math.round((p.tasks.filter(x=>x.done).length / p.tasks.length) * 100);
-        }
+        if (p.tasks.length) p.progress = Math.round((p.tasks.filter(x=>x.done).length / p.tasks.length) * 100);
         return s;
       });
       render();
     });
   };
-
   return Object.freeze({render, bind, openForm});
 })();
 
 /* =========================================================
-   [17] NEXA.AnalyticsView — Vista analytics
+   [17] AnalyticsView
    ========================================================= */
 NEXA.AnalyticsView = (() => {
   const healthHost = document.getElementById("healthKpis");
   const recoBox    = document.getElementById("recoBox");
-
   const renderHeatmap = (state) => {
     const grid = NEXA.AnalyticsModel.heatmapData(state, 4);
     let max = 1;
     grid.forEach(row => row.forEach(v => { if (v>max) max = v; }));
     const host = document.getElementById("heatmap");
     host.innerHTML = "";
-    // render 7 rows × 24 cols (transpose per mostrare 24 colonne × 7 righe giorni)
     for (let d=0; d<7; d++) {
       for (let h=0; h<24; h++) {
         const v = grid[d][h];
@@ -2513,13 +2391,12 @@ NEXA.AnalyticsView = (() => {
         const alpha = (0.05 + intensity * 0.95).toFixed(2);
         const cell = document.createElement("div");
         cell.className = "cell";
-        cell.title = `${NEXA.Config.DAYS_IT[d]} ${String(h).padStart(2,"0")}:00 · ${v} eventi`;
+        cell.title = `${NEXA.Config.DAYS_IT[d]} ${String(h).padStart(2,"0")}:00 · ${v}`;
         cell.style.background = `rgba(110,168,255,${alpha})`;
         host.appendChild(cell);
       }
     }
   };
-
   const renderHealth = (state) => {
     const k = NEXA.AnalyticsModel.kpis(state);
     const margin = k.income > 0 ? (k.profit / k.income) * 100 : 0;
@@ -2528,7 +2405,7 @@ NEXA.AnalyticsView = (() => {
     const items = [
       {label:"Margine netto", value: margin.toFixed(1)+"%", good: margin > 20},
       {label:"Burn-rate mensile", value: NEXA.Utils.fmtEUR(burn), good: burn < k.income},
-      {label:"Runway (mesi stimati)", value: runway, good: runway > 3},
+      {label:"Runway (mesi)", value: runway, good: runway > 3},
       {label:"Ticket medio", value: NEXA.Utils.fmtEUR(k.avgTicket), good: k.avgTicket > 1500}
     ];
     healthHost.innerHTML = items.map(it => `
@@ -2537,28 +2414,24 @@ NEXA.AnalyticsView = (() => {
         <span style="font-weight:600;color:${it.good?'var(--success)':'var(--warn)'}">${it.value}</span>
       </div>`).join("");
   };
-
   const renderRecommendations = (state) => {
     const k = NEXA.AnalyticsModel.kpis(state);
     const recs = [];
-    if (k.growth < -5) recs.push("📉 Il profitto è in calo: rivedi pricing o riduci costi non-core.");
-    if (k.activeClients < 5) recs.push("🎯 Base clienti ridotta: avvia campagna di lead generation.");
+    if (k.growth < -5) recs.push("📉 Profitto in calo: rivedi pricing o riduci costi non-core.");
+    if (k.activeClients < 5) recs.push("🎯 Base clienti ridotta: avvia lead generation.");
     const overdue = state.projects.filter(p => p.progress < 100 && new Date(p.deadline) < new Date());
-    if (overdue.length) recs.push(`⏰ ${overdue.length} progetti in ritardo: rialloca risorse o rinegozia deadline.`);
+    if (overdue.length) recs.push(`⏰ ${overdue.length} progetti in ritardo.`);
     const catTop = NEXA.AnalyticsModel.categoryBreakdown(state, "expense");
     if (catTop.data[0] && catTop.data[0] > k.expense * 0.35)
-      recs.push(`💰 ${catTop.labels[0]} incide per oltre il 35% delle uscite: valuta alternative.`);
-    if (!recs.length) recs.push("✨ Il business appare in salute. Continua così e pianifica investimenti strategici.");
+      recs.push(`💰 ${catTop.labels[0]} incide > 35% uscite.`);
+    if (!recs.length) recs.push("✨ Business in salute. Pianifica investimenti strategici.");
     recoBox.innerHTML = recs.map(r => `<p style="margin-bottom:10px">${r}</p>`).join("");
   };
-
   const renderCharts = (state) => {
     const cf = NEXA.AnalyticsModel.monthlyCashflow(state, 12);
     NEXA.Charts.barChart(document.getElementById("chartProfit"), {
-      labels: cf.labels, data: cf.profit,
-      colors: cf.profit.map(v => v >= 0 ? "#34d399" : "#f87171")
+      labels: cf.labels, data: cf.profit, colors: cf.profit.map(v => v >= 0 ? "#34d399" : "#f87171")
     });
-    // Client trend (simulato su createdAt)
     const labels = [], data = [];
     for (let i=11;i>=0;i--) {
       const d = new Date(new Date().getFullYear(), new Date().getMonth()-i, 1);
@@ -2574,84 +2447,228 @@ NEXA.AnalyticsView = (() => {
       labels: cat.labels.slice(0,6), data: cat.data.slice(0,6)
     });
   };
-
   const render = () => {
     const s = NEXA.Storage.load();
-    renderHeatmap(s);
-    renderHealth(s);
-    renderRecommendations(s);
-    renderCharts(s);
+    renderHeatmap(s); renderHealth(s); renderRecommendations(s); renderCharts(s);
   };
-
   return Object.freeze({render});
 })();
 
 /* =========================================================
-   [18] NEXA.AI — Assistant rule-based (fake-smart)
+   [18] Gemini — Client HTTP per Google AI
+   ========================================================= */
+NEXA.Gemini = (() => {
+  const ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
+
+  const getApiKey = () => {
+    try { return localStorage.getItem(NEXA.Config.API_KEY) || ""; } catch { return ""; }
+  };
+  const setApiKey = (key) => {
+    try { localStorage.setItem(NEXA.Config.API_KEY, key || ""); } catch {}
+  };
+  const clearApiKey = () => { try { localStorage.removeItem(NEXA.Config.API_KEY); } catch {} };
+
+  const getConfig = () => {
+    try {
+      const raw = localStorage.getItem(NEXA.Config.AI_CFG_KEY);
+      if (!raw) return { model:"gemini-2.0-flash", temperature:0.7 };
+      const cfg = JSON.parse(raw);
+      return {
+        model: cfg.model || "gemini-2.0-flash",
+        temperature: NEXA.Utils.clamp(parseFloat(cfg.temperature) || 0.7, 0, 2)
+      };
+    } catch { return { model:"gemini-2.0-flash", temperature:0.7 }; }
+  };
+  const setConfig = (cfg) => {
+    try { localStorage.setItem(NEXA.Config.AI_CFG_KEY, JSON.stringify(cfg)); } catch {}
+  };
+
+  const isValidKey = (k) => typeof k === "string" && k.startsWith("AIza") && k.length >= 30;
+  const isConfigured = () => isValidKey(getApiKey());
+
+  let lastCallTs = 0;
+  const rateLimitWait = () => {
+    const now = Date.now();
+    const wait = Math.max(0, NEXA.Config.AI_RATE_LIMIT_MS - (now - lastCallTs));
+    lastCallTs = now + wait;
+    return new Promise(r => setTimeout(r, wait));
+  };
+
+  const SYSTEM_PROMPT = `Sei NEXA AI, l'assistente business integrato in una dashboard enterprise chiamata NEXA Business Core.
+Il tuo ruolo è aiutare imprenditori e manager a:
+- Analizzare KPI finanziari (entrate, uscite, profitto, margini)
+- Gestire clienti e pipeline di vendita
+- Tracciare progetti, task e scadenze
+- Dare consigli strategici concreti e action-oriented
+
+Rispondi SEMPRE in italiano, in modo conciso, professionale e pratico.
+Usa elenchi puntati quando elenchi azioni. Cita i dati reali forniti nel contesto.
+Evita risposte generiche: dai numeri, percentuali e azioni specifiche.
+Se il contesto non contiene dati sufficienti, chiedi chiarimenti o suggerisci quali dati servirebbero.
+Lunghezza ideale risposta: 80-200 parole.`;
+
+  const ask = async (userPrompt, contextData) => {
+    const apiKey = getApiKey();
+    if (!isValidKey(apiKey)) {
+      throw new Error("API key non configurata");
+    }
+
+    await rateLimitWait();
+
+    const cfg = getConfig();
+    const fullPrompt = contextData
+      ? `CONTESTO BUSINESS ATTUALE:\n${contextData}\n\nRICHIESTA UTENTE:\n${userPrompt}`
+      : userPrompt;
+
+    const url = `${ENDPOINT}/${encodeURIComponent(cfg.model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), NEXA.Config.AI_TIMEOUT_MS);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
+          generationConfig: {
+            temperature: cfg.temperature,
+            topP: 0.95,
+            topK: 40,
+            maxOutputTokens: 1024
+          },
+          safetySettings: [
+            { category: "HARM_CATEGORY_HARASSMENT",        threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+            { category: "HARM_CATEGORY_HATE_SPEECH",       threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+            { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+            { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" }
+          ]
+        }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        const errText = await response.text().catch(() => "");
+        let errMsg = `HTTP ${response.status}`;
+        try {
+          const errJson = JSON.parse(errText);
+          if (errJson.error && errJson.error.message) errMsg = errJson.error.message;
+        } catch {}
+        if (response.status === 400) throw new Error("Richiesta non valida: " + errMsg);
+        if (response.status === 401 || response.status === 403) throw new Error("API key non valida o permessi mancanti");
+        if (response.status === 404) throw new Error(`Modello '${cfg.model}' non trovato`);
+        if (response.status === 429) throw new Error("Quota API superata. Riprova tra qualche minuto.");
+        throw new Error(errMsg);
+      }
+
+      const data = await response.json();
+      const candidates = data.candidates;
+      if (!candidates || !candidates.length) {
+        const reason = data.promptFeedback?.blockReason;
+        throw new Error(reason ? `Contenuto bloccato: ${reason}` : "Nessuna risposta dal modello");
+      }
+      const parts = candidates[0].content?.parts;
+      if (!parts || !parts.length) throw new Error("Risposta vuota");
+      return parts.map(p => p.text || "").join("").trim();
+    } catch (e) {
+      clearTimeout(timeout);
+      if (e.name === "AbortError") throw new Error("Timeout: la richiesta ha impiegato troppo tempo");
+      throw e;
+    }
+  };
+
+  const testConnection = async () => {
+    try {
+      const result = await ask("Rispondi solo con 'OK' in 2 parole.", null);
+      return { ok: true, msg: result || "OK" };
+    } catch (e) {
+      return { ok: false, msg: e.message };
+    }
+  };
+
+  return Object.freeze({
+    getApiKey, setApiKey, clearApiKey,
+    getConfig, setConfig,
+    isValidKey, isConfigured,
+    ask, testConnection
+  });
+})();
+
+/* =========================================================
+   [19] AI Assistant — Hybrid (Gemini + offline fallback)
    ========================================================= */
 NEXA.AI = (() => {
   const bodyEl  = document.getElementById("chatBody");
   const inputEl = document.getElementById("chatInput");
   const sendBtn = document.getElementById("chatSend");
+  const statusEl = document.getElementById("aiStatus");
+  const statusTitle = document.getElementById("aiStatusTitle");
+  const statusSub = document.getElementById("aiStatusSub");
+  const engineTag = document.getElementById("aiEngineTag");
 
+  const updateStatusIndicator = () => {
+    const online = NEXA.Gemini.isConfigured();
+    const cfg = NEXA.Gemini.getConfig();
+    statusEl.classList.toggle("online", online);
+    statusEl.classList.toggle("offline", !online);
+    if (online) {
+      statusTitle.textContent = "Gemini online";
+      statusSub.textContent = ` · ${cfg.model}`;
+      engineTag.textContent = `Gemini ${cfg.model.split("-").slice(1).join(" ")}`;
+      engineTag.className = "tag green";
+    } else {
+      statusTitle.textContent = "Offline mode";
+      statusSub.textContent = " · AI rule-based · Configura API key in Impostazioni";
+      engineTag.textContent = "Offline fallback";
+      engineTag.className = "tag yellow";
+    }
+  };
+
+  // Rule-based fallback
   const RULES = [
-    {
-      match: /profit|profitto|margin|guadagn/,
+    { match: /profit|profitto|margin|guadagn/,
       reply: () => {
         const k = NEXA.AnalyticsModel.kpis(NEXA.Storage.load());
-        return [
-          `Analisi rapida: il tuo margine attuale è ${k.income>0?((k.profit/k.income)*100).toFixed(1):0}%.`,
-          `Tre leve per aumentarlo:\n1. Rivedi pricing dei servizi a basso margine.\n2. Riduci spese ricorrenti nella top-3 categorie.\n3. Introduci upsell su clienti attivi (${k.activeClients} al momento).`
-        ].join("\n\n");
-      }
-    },
-    {
-      match: /spes|cost|uscit/,
+        return `Analisi rapida: margine attuale ${k.income>0?((k.profit/k.income)*100).toFixed(1):0}%.\n\nTre leve:\n1. Rivedi pricing servizi a basso margine.\n2. Riduci spese top-3 categorie.\n3. Upsell su ${k.activeClients} clienti attivi.`;
+      }},
+    { match: /spes|cost|uscit/,
       reply: () => {
-        const s = NEXA.Storage.load();
-        const cat = NEXA.AnalyticsModel.categoryBreakdown(s, "expense");
-        const top = cat.labels.slice(0,3).map((l,i) => `${i+1}. ${l} — ${NEXA.Utils.fmtEUR(cat.data[i])}`).join("\n");
-        return `Ecco le categorie con più uscite:\n${top}\n\n💡 Suggerimento: imposta budget più stretti e ricevi alert al superamento dell'80%.`;
-      }
-    },
-    {
-      match: /produtt|team|lavor|focus/,
-      reply: () => `Per la produttività del team suggerisco:\n• Time-boxing: 90 min di focus senza interruzioni.\n• Standup settimanale di 15 min, non giornaliero.\n• Regola 2-minute: se un task richiede <2 min, fallo subito.\n• Blocca 2 slot "deep work" in agenda ogni giorno.`
-    },
-    {
-      match: /client|crm|lead/,
+        const cat = NEXA.AnalyticsModel.categoryBreakdown(NEXA.Storage.load(), "expense");
+        const top = cat.labels.slice(0,3).map((l,i) => `${i+1}. ${l} — €${cat.data[i]}`).join("\n");
+        return `Top categorie spesa:\n${top}\n\n💡 Imposta budget stretti con alert 80%.`;
+      }},
+    { match: /produtt|team|lavor|focus/,
+      reply: () => `Suggerimenti produttività:\n• Time-boxing 90min focus.\n• Standup settimanale 15min.\n• Regola 2-minute: se <2min, fallo subito.\n• 2 slot "deep work" al giorno.` },
+    { match: /client|crm|lead/,
       reply: () => {
-        const s = NEXA.Storage.load();
-        const lead = s.clients.filter(c => c.status === "lead").length;
-        return `Hai ${lead} lead da convertire. Pipeline ideale:\n1. Primo contatto entro 24h.\n2. Discovery call entro 3 giorni.\n3. Proposta scritta entro 7 giorni.\n4. Follow-up ogni 5 giorni fino a chiusura.\n\nUsa la vista Clienti per filtrare per stato "Lead".`;
-      }
-    },
-    {
-      match: /scadenz|deadline|progett/,
+        const lead = NEXA.Storage.load().clients.filter(c => c.status === "lead").length;
+        return `${lead} lead da convertire. Pipeline:\n1. Contatto entro 24h\n2. Discovery entro 3gg\n3. Proposta entro 7gg\n4. Follow-up ogni 5gg`;
+      }},
+    { match: /scadenz|deadline|progett/,
       reply: () => {
-        const s = NEXA.Storage.load();
-        const soon = s.projects.filter(p => p.progress < 100 && NEXA.Utils.daysBetween(new Date().toISOString(), p.deadline) <= 14);
-        if (!soon.length) return "Nessuna scadenza critica nelle prossime 2 settimane. Ottimo momento per pianificare Q+1.";
-        return `Progetti in scadenza entro 14 giorni:\n${soon.map(p=>`• ${p.name} (${p.progress}%) — ${NEXA.Utils.fmtDate(p.deadline)}`).join("\n")}`;
-      }
-    },
-    {
-      match: /ciao|salve|hey|hello|buon/,
-      reply: () => "Ciao! Sono NEXA AI, il tuo assistente business. Posso aiutarti con analisi, consigli di produttività e report. Cosa vuoi esplorare?"
-    },
-    {
-      match: /help|aiuto|cosa puoi/,
-      reply: () => "Posso:\n• Analizzare entrate/uscite\n• Suggerire strategie di profitto\n• Monitorare scadenze progetti\n• Darti consigli di produttività\n• Identificare lead da convertire\n\nProva con: 'analisi spese', 'consigli profitto', 'scadenze settimana'."
-    }
+        const soon = NEXA.Storage.load().projects.filter(p => p.progress < 100 && NEXA.Utils.daysBetween(new Date().toISOString(), p.deadline) <= 14);
+        if (!soon.length) return "Nessuna scadenza critica nelle 2 settimane.";
+        return `Scadenze entro 14gg:\n${soon.map(p=>`• ${p.name} (${p.progress}%) — ${NEXA.Utils.fmtDate(p.deadline)}`).join("\n")}`;
+      }},
+    { match: /report|kpi|executive/,
+      reply: () => {
+        const k = NEXA.AnalyticsModel.kpis(NEXA.Storage.load());
+        return `Executive summary:\n• Entrate: €${k.income}\n• Uscite: €${k.expense}\n• Profitto: €${k.profit} (${k.growth.toFixed(1)}% MoM)\n• Clienti attivi: ${k.activeClients}/${k.clients}\n• Progetti: ${k.activeProjects} in corso`;
+      }},
+    { match: /ciao|salve|hey|hello|buon/,
+      reply: () => "Ciao! Sono NEXA AI. Posso analizzare KPI, suggerire strategie e aiutarti con clienti/progetti. Cosa vuoi esplorare?" },
+    { match: /help|aiuto|cosa puoi/,
+      reply: () => "Posso:\n• Analizzare entrate/uscite\n• Suggerire strategie profitto\n• Monitorare scadenze\n• Consigli produttività\n• Identificare lead\n\nProva: 'analisi spese', 'report KPI', 'scadenze'." }
   ];
-
   const fallbackReplies = [
-    "Domanda interessante. Prova a riformulare con parole chiave come 'profitto', 'spese', 'clienti', 'produttività' o 'scadenze'.",
-    "Non ho abbastanza contesto. Puoi specificare meglio? Ad esempio: 'come ridurre le spese di marketing?'",
-    "Sto analizzando i tuoi dati… nel frattempo prova: 'top categorie spesa' o 'progetti in ritardo'."
+    "Domanda interessante. Prova: 'profitto', 'spese', 'clienti', 'produttività' o 'report KPI'.",
+    "Specifica meglio. Es: 'come ridurre spese marketing?'",
+    "Configura la API key Google in Impostazioni per risposte AI avanzate su qualsiasi domanda."
   ];
-
-  const replyFor = (q) => {
+  const offlineReplyFor = (q) => {
     for (const r of RULES) if (r.match.test(q)) return typeof r.reply === "function" ? r.reply() : r.reply;
     return fallbackReplies[Math.floor(Math.random()*fallbackReplies.length)];
   };
@@ -2666,7 +2683,6 @@ NEXA.AI = (() => {
     bodyEl.scrollTop = bodyEl.scrollHeight;
     return el;
   };
-
   const addTyping = () => {
     const el = document.createElement("div");
     el.className = "msg bot";
@@ -2676,83 +2692,197 @@ NEXA.AI = (() => {
     return el;
   };
 
-  const send = (text) => {
+  const send = async (text) => {
     text = (text || inputEl.value || "").trim();
     if (!text) return;
     addMsg("user", text);
     inputEl.value = "";
+    sendBtn.disabled = true;
     const t = addTyping();
-    const delay = 500 + Math.min(1400, text.length * 18);
-    setTimeout(() => {
+
+    try {
+      let reply;
+      if (NEXA.Gemini.isConfigured()) {
+        const ctx = NEXA.AnalyticsModel.contextSummary(NEXA.Storage.load());
+        reply = await NEXA.Gemini.ask(text, ctx);
+      } else {
+        await new Promise(r => setTimeout(r, 600 + Math.min(1200, text.length * 15)));
+        reply = offlineReplyFor(text);
+      }
       t.remove();
-      addMsg("bot", replyFor(text));
-    }, delay);
+      addMsg("bot", reply);
+    } catch (e) {
+      t.remove();
+      addMsg("bot", `⚠️ Errore AI: ${e.message}\n\nPasso al fallback offline:\n\n${offlineReplyFor(text)}`);
+      NEXA.UI.toast({type:"warn", title:"Errore Gemini", msg: e.message});
+    } finally {
+      sendBtn.disabled = false;
+    }
   };
 
   const bind = () => {
     sendBtn.addEventListener("click", () => send());
-    inputEl.addEventListener("keydown", (e) => { if (e.key === "Enter") send(); });
+    inputEl.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }});
     document.querySelectorAll("[data-prompt]").forEach(b => {
       b.addEventListener("click", () => send(b.dataset.prompt));
     });
-    // messaggio di benvenuto
+    updateStatusIndicator();
+    NEXA.EventBus.on("ai:config-changed", updateStatusIndicator);
     setTimeout(() => {
-      addMsg("bot", "Benvenuto in NEXA AI. Sono il tuo assistente business: posso analizzare dati, suggerire strategie e aiutarti a prendere decisioni. Cosa vuoi esplorare oggi?");
-    }, 200);
+      const greeting = NEXA.Gemini.isConfigured()
+        ? "Benvenuto! Sono NEXA AI powered by Gemini. Ho accesso ai tuoi dati in tempo reale. Cosa vuoi analizzare oggi?"
+        : "Benvenuto! Sono NEXA AI (modalità offline). Per risposte AI avanzate, configura la API key Google in Impostazioni. Cosa vuoi esplorare?";
+      addMsg("bot", greeting);
+    }, 300);
   };
 
-  return Object.freeze({bind, send, replyFor});
+  return Object.freeze({bind, send, updateStatusIndicator});
 })();
 
 /* =========================================================
-   [19] NEXA.CommandPalette — Cmd+K style
+   [20] Settings
+   ========================================================= */
+NEXA.Settings = (() => {
+  const apiKeyInput   = document.getElementById("apiKeyInput");
+  const aiModelSelect = document.getElementById("aiModelSelect");
+  const aiTempInput   = document.getElementById("aiTempInput");
+  const saveBtn       = document.getElementById("saveApiKeyBtn");
+  const showHideBtn   = document.getElementById("showHideKeyBtn");
+  const clearBtn      = document.getElementById("clearApiKeyBtn");
+  const statusBadge   = document.getElementById("settingsAiBadge");
+  const statusText    = document.getElementById("settingsAiStatus");
+
+  const refreshStatus = () => {
+    if (NEXA.Gemini.isConfigured()) {
+      const key = NEXA.Gemini.getApiKey();
+      statusBadge.textContent = "Configurata";
+      statusBadge.className = "tag green";
+      statusText.innerHTML = `<span class="status-dot ok"></span>Key attiva: <code>${NEXA.Utils.maskKey(key)}</code>`;
+    } else {
+      statusBadge.textContent = "Non configurata";
+      statusBadge.className = "tag yellow";
+      statusText.innerHTML = `<span class="status-dot off"></span>Nessuna API key salvata`;
+    }
+  };
+
+  const loadIntoForm = () => {
+    const cfg = NEXA.Gemini.getConfig();
+    aiModelSelect.value = cfg.model;
+    aiTempInput.value = cfg.temperature;
+    apiKeyInput.value = NEXA.Gemini.getApiKey();
+    refreshStatus();
+  };
+
+  saveBtn.addEventListener("click", async () => {
+    const key = apiKeyInput.value.trim();
+    if (!key) { NEXA.UI.toast({type:"warn", title:"API key vuota", msg:"Inserisci una key valida"}); return; }
+    if (!NEXA.Gemini.isValidKey(key)) {
+      NEXA.UI.toast({type:"error", title:"Formato non valido", msg:"Le API key Google iniziano con 'AIza'"});
+      return;
+    }
+    const cfg = {
+      model: aiModelSelect.value,
+      temperature: NEXA.Utils.clamp(parseFloat(aiTempInput.value) || 0.7, 0, 2)
+    };
+    NEXA.Gemini.setApiKey(key);
+    NEXA.Gemini.setConfig(cfg);
+    NEXA.UI.toast({type:"info", title:"Test connessione…", msg:"Verifico la key con Gemini"});
+    refreshStatus();
+    NEXA.AI.updateStatusIndicator();
+    const test = await NEXA.Gemini.testConnection();
+    if (test.ok) {
+      NEXA.UI.toast({type:"success", title:"Gemini connesso ✓", msg: test.msg});
+    } else {
+      NEXA.UI.toast({type:"error", title:"Connessione fallita", msg: test.msg});
+      NEXA.Gemini.clearApiKey();
+      apiKeyInput.value = "";
+      refreshStatus();
+      NEXA.AI.updateStatusIndicator();
+    }
+  });
+
+  showHideBtn.addEventListener("click", () => {
+    apiKeyInput.type = apiKeyInput.type === "password" ? "text" : "password";
+  });
+
+  clearBtn.addEventListener("click", () => {
+    NEXA.UI.confirm("Rimuovere API key?", "L'AI tornerà in modalità offline.").then(ok => {
+      if (!ok) return;
+      NEXA.Gemini.clearApiKey();
+      apiKeyInput.value = "";
+      refreshStatus();
+      NEXA.AI.updateStatusIndicator();
+      NEXA.UI.toast({type:"info", title:"Key rimossa", msg:"AI in modalità offline"});
+    });
+  });
+
+  document.getElementById("settingsBackupBtn").addEventListener("click", NEXA.Export.allJSON);
+  document.getElementById("settingsImportBtn").addEventListener("click", () => document.getElementById("importFile").click());
+  document.getElementById("settingsResetBtn").addEventListener("click", () => {
+    NEXA.UI.confirm("Ripristinare dati demo?", "I dati attuali verranno sovrascritti.").then(ok => {
+      if (!ok) return;
+      NEXA.Storage.reset();
+      NEXA.Seed.apply();
+      NEXA.UI.toast({type:"success", title:"Reset completato", msg:"Dati demo ricaricati"});
+    });
+  });
+  document.getElementById("settingsWipeBtn").addEventListener("click", () => {
+    NEXA.UI.confirm("⚠️ Cancellare TUTTI i dati?", "Questa operazione è irreversibile. Verranno rimossi anche API key e PIN.").then(ok => {
+      if (!ok) return;
+      NEXA.Storage.wipe();
+      NEXA.UI.toast({type:"info", title:"Dati eliminati", msg:"Ricarico la pagina…"});
+      setTimeout(() => location.reload(), 1200);
+    });
+  });
+
+  const init = () => {
+    loadIntoForm();
+    NEXA.EventBus.on("ai:config-changed", loadIntoForm);
+  };
+
+  return Object.freeze({init, refreshStatus, loadIntoForm});
+})();
+
+/* =========================================================
+   [21] Command Palette
    ========================================================= */
 NEXA.CommandPalette = (() => {
   const el = document.getElementById("palette");
   const input = document.getElementById("paletteInput");
   const list  = document.getElementById("paletteList");
-  let selectedIdx = 0;
-  let items = [];
+  let selectedIdx = 0, items = [];
 
   const COMMANDS = [
-    {id:"nav.dashboard",  title:"Vai a Dashboard",    desc:"Navigazione",  icon:"grid",    run:()=>NEXA.Router.go("dashboard")},
-    {id:"nav.expenses",   title:"Vai a Spese",        desc:"Navigazione",  icon:"wallet",  run:()=>NEXA.Router.go("expenses")},
-    {id:"nav.clients",    title:"Vai a Clienti",      desc:"Navigazione",  icon:"users",   run:()=>NEXA.Router.go("clients")},
-    {id:"nav.projects",   title:"Vai a Progetti",     desc:"Navigazione",  icon:"check",   run:()=>NEXA.Router.go("projects")},
-    {id:"nav.analytics",  title:"Vai ad Analytics",   desc:"Navigazione",  icon:"chart",   run:()=>NEXA.Router.go("analytics")},
-    {id:"nav.assistant",  title:"Vai ad AI Assistant",desc:"Navigazione",  icon:"sparkle", run:()=>NEXA.Router.go("assistant")},
-    {id:"new.expense",    title:"Nuova transazione",  desc:"Azione rapida",icon:"plus",    run:()=>{NEXA.Router.go("expenses"); setTimeout(()=>NEXA.Expenses.openForm(),120)}},
-    {id:"new.client",     title:"Nuovo cliente",      desc:"Azione rapida",icon:"plus",    run:()=>{NEXA.Router.go("clients");  setTimeout(()=>NEXA.Clients.openForm(),120)}},
-    {id:"new.project",    title:"Nuovo progetto",     desc:"Azione rapida",icon:"plus",    run:()=>{NEXA.Router.go("projects"); setTimeout(()=>NEXA.Projects.openForm(),120)}},
-    {id:"export.csv",     title:"Esporta spese CSV",  desc:"Export",       icon:"download",run:NEXA.Export.expensesCSV},
-    {id:"export.pdf",     title:"Esporta spese PDF",  desc:"Export",       icon:"download",run:NEXA.Export.expensesPDF},
-    {id:"export.json",    title:"Backup completo JSON",desc:"Export",      icon:"download",run:NEXA.Export.allJSON},
-    {id:"import.json",    title:"Importa backup JSON", desc:"Import",      icon:"upload",  run:()=>document.getElementById("importFile").click()},
-    {id:"theme.toggle",   title:"Cambia tema (dark/light)",desc:"UI",     icon:"sun",     run:()=>NEXA.Theme.toggle()},
-    {id:"lock",           title:"Blocca sessione",    desc:"Sicurezza",    icon:"lock",    run:()=>NEXA.Auth.lock()},
-    {id:"reset",          title:"Reset dati demo",    desc:"Avanzato",     icon:"trash",   run:()=>{
-      NEXA.UI.confirm("Ripristinare dati demo?", "Tutti i dati locali verranno sovrascritti.").then(ok=>{
-        if (!ok) return;
-        NEXA.Storage.reset(); NEXA.Seed.apply();
-        NEXA.UI.toast({type:"success",title:"Reset completato",msg:"Dati demo ricaricati"});
-        NEXA.EventBus.emit("state:changed", NEXA.Storage.load());
-      });
-    }}
+    {id:"nav.dashboard", title:"Dashboard", desc:"Navigazione", icon:"grid", run:()=>NEXA.Router.go("dashboard")},
+    {id:"nav.expenses",  title:"Spese", desc:"Navigazione", icon:"wallet", run:()=>NEXA.Router.go("expenses")},
+    {id:"nav.clients",   title:"Clienti", desc:"Navigazione", icon:"users", run:()=>NEXA.Router.go("clients")},
+    {id:"nav.projects",  title:"Progetti", desc:"Navigazione", icon:"check", run:()=>NEXA.Router.go("projects")},
+    {id:"nav.analytics", title:"Analytics", desc:"Navigazione", icon:"chart", run:()=>NEXA.Router.go("analytics")},
+    {id:"nav.assistant", title:"AI Assistant", desc:"Navigazione", icon:"sparkle", run:()=>NEXA.Router.go("assistant")},
+    {id:"nav.settings",  title:"Impostazioni", desc:"Navigazione", icon:"settings", run:()=>NEXA.Router.go("settings")},
+    {id:"new.expense",   title:"Nuova transazione", desc:"Azione", icon:"plus", run:()=>{NEXA.Router.go("expenses"); setTimeout(()=>NEXA.Expenses.openForm(),120)}},
+    {id:"new.client",    title:"Nuovo cliente", desc:"Azione", icon:"plus", run:()=>{NEXA.Router.go("clients"); setTimeout(()=>NEXA.Clients.openForm(),120)}},
+    {id:"new.project",   title:"Nuovo progetto", desc:"Azione", icon:"plus", run:()=>{NEXA.Router.go("projects"); setTimeout(()=>NEXA.Projects.openForm(),120)}},
+    {id:"export.csv",    title:"Esporta CSV", desc:"Export", icon:"download", run:NEXA.Export.expensesCSV},
+    {id:"export.pdf",    title:"Esporta PDF", desc:"Export", icon:"download", run:NEXA.Export.expensesPDF},
+    {id:"export.json",   title:"Backup JSON", desc:"Export", icon:"download", run:NEXA.Export.allJSON},
+    {id:"import.json",   title:"Importa JSON", desc:"Import", icon:"upload", run:()=>document.getElementById("importFile").click()},
+    {id:"theme.toggle",  title:"Cambia tema", desc:"UI", icon:"sun", run:()=>NEXA.Theme.toggle()},
+    {id:"lock",          title:"Blocca sessione", desc:"Sicurezza", icon:"lock", run:()=>NEXA.Auth.lock()}
   ];
-
   const ICONS = {
     grid:'<rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/>',
-    wallet:'<path d="M3 7h18M5 7v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>',
+    wallet:'<path d="M3 7h18M5 7v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"/>',
     users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>',
-    check:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+    check:'<path d="M9 11l3 3L22 4"/>',
     chart:'<path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 6-6"/>',
     sparkle:'<path d="M12 2l2 7 7 2-7 2-2 7-2-7-7-2 7-2z"/>',
+    settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
     plus:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
     download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
     upload:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>',
-    sun:'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>',
-    lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
-    trash:'<polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>'
+    sun:'<circle cx="12" cy="12" r="5"/>',
+    lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
   };
 
   const render = (q="") => {
@@ -2762,22 +2892,18 @@ NEXA.CommandPalette = (() => {
       <div class="palette-item ${i===0?'sel':''}" data-idx="${i}">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ICONS[c.icon]||''}</svg></div>
         <div class="txt"><b>${NEXA.Utils.escapeHTML(c.title)}</b><span>${NEXA.Utils.escapeHTML(c.desc)}</span></div>
-      </div>`).join("") : `<div style="padding:20px;text-align:center;color:var(--text-mute);font-size:13px">Nessun comando trovato</div>`;
+      </div>`).join("") : `<div style="padding:20px;text-align:center;color:var(--text-mute);font-size:13px">Nessun comando</div>`;
   };
-
   const open = () => { el.classList.add("show"); input.value=""; render(); setTimeout(()=>input.focus(),50); };
   const close = () => { el.classList.remove("show"); };
   const exec = (idx) => {
-    const c = items[idx];
-    if (!c) return;
+    const c = items[idx]; if (!c) return;
     close();
-    try { c.run(); } catch(e) { console.error(e); NEXA.UI.toast({type:"error",title:"Errore comando",msg:e.message}); }
+    try { c.run(); } catch(e) { console.error(e); NEXA.UI.toast({type:"error",title:"Errore",msg:e.message}); }
   };
-
   const updateSel = () => {
     list.querySelectorAll(".palette-item").forEach((el,i) => el.classList.toggle("sel", i===selectedIdx));
   };
-
   input.addEventListener("input", (e) => render(e.target.value));
   input.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
@@ -2790,12 +2916,11 @@ NEXA.CommandPalette = (() => {
     if (it) exec(parseInt(it.dataset.idx,10));
   });
   el.addEventListener("click", (e) => { if (e.target === el) close(); });
-
   return Object.freeze({open, close});
 })();
 
 /* =========================================================
-   [20] NEXA.Shortcuts — Scorciatoie globali
+   [22] Shortcuts
    ========================================================= */
 NEXA.Shortcuts = (() => {
   const isInputFocused = () => {
@@ -2808,19 +2933,10 @@ NEXA.Shortcuts = (() => {
     if (e.key === "Escape") { document.getElementById("palette").classList.remove("show"); NEXA.UI.closeModal(false); return; }
     if (isInputFocused()) return;
     if (e.altKey) {
-      const map = { "1":"dashboard","2":"expenses","3":"clients","4":"projects","5":"analytics","6":"assistant" };
+      const map = { "1":"dashboard","2":"expenses","3":"clients","4":"projects","5":"analytics","6":"assistant","7":"settings" };
       if (map[e.key]) { e.preventDefault(); NEXA.Router.go(map[e.key]); }
     }
-    if (mod && e.shiftKey && e.key.toLowerCase() === "n") {
-      e.preventDefault();
-      const v = NEXA.Router.current();
-      if (v==="expenses") NEXA.Expenses.openForm();
-      else if (v==="clients") NEXA.Clients.openForm();
-      else if (v==="projects") NEXA.Projects.openForm();
-      else NEXA.Expenses.openForm();
-    }
   });
-
   document.getElementById("globalSearch").addEventListener("focus", (e) => {
     e.target.blur();
     NEXA.CommandPalette.open();
@@ -2828,7 +2944,7 @@ NEXA.Shortcuts = (() => {
 })();
 
 /* =========================================================
-   [21] NEXA.QuickActions — Topbar actions
+   [23] QuickActions
    ========================================================= */
 NEXA.QuickActions = (() => {
   document.getElementById("quickAddBtn").addEventListener("click", () => {
@@ -2837,30 +2953,25 @@ NEXA.QuickActions = (() => {
     else if (v === "projects") NEXA.Projects.openForm();
     else NEXA.Expenses.openForm();
   });
-
   document.getElementById("exportAllBtn").addEventListener("click", async () => {
     const html = `
       <div style="display:grid;gap:8px">
-        <button class="btn" data-x="csv" style="justify-content:flex-start">📊 Esporta spese CSV</button>
-        <button class="btn" data-x="pdf" style="justify-content:flex-start">📄 Esporta spese PDF</button>
-        <button class="btn" data-x="json" style="justify-content:flex-start">💾 Backup completo JSON</button>
-        <button class="btn" data-x="import" style="justify-content:flex-start">📥 Importa backup JSON</button>
+        <button class="btn" data-x="csv" style="justify-content:flex-start">📊 Esporta CSV</button>
+        <button class="btn" data-x="pdf" style="justify-content:flex-start">📄 Esporta PDF</button>
+        <button class="btn" data-x="json" style="justify-content:flex-start">💾 Backup JSON</button>
+        <button class="btn" data-x="import" style="justify-content:flex-start">📥 Importa JSON</button>
       </div>`;
-    const ok = await NEXA.UI.openModal({title:"Export & Import", lead:"Scegli un'operazione sui dati.", bodyHTML:html, confirmText:"Chiudi"});
-    if (!ok) return;
+    await NEXA.UI.openModal({title:"Export & Import", lead:"Scegli un'operazione.", bodyHTML:html, confirmText:"Chiudi"});
   });
-
   document.getElementById("modalBody").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-x]");
-    if (!b) return;
+    const b = e.target.closest("[data-x]"); if (!b) return;
     NEXA.UI.closeModal(true);
     const x = b.dataset.x;
-    if (x === "csv")    NEXA.Export.expensesCSV();
-    if (x === "pdf")    NEXA.Export.expensesPDF();
-    if (x === "json")   NEXA.Export.allJSON();
+    if (x === "csv") NEXA.Export.expensesCSV();
+    if (x === "pdf") NEXA.Export.expensesPDF();
+    if (x === "json") NEXA.Export.allJSON();
     if (x === "import") document.getElementById("importFile").click();
   });
-
   document.getElementById("importFile").addEventListener("change", (e) => {
     const f = e.target.files && e.target.files[0];
     if (f) NEXA.Export.importJSONFile(f);
@@ -2869,10 +2980,9 @@ NEXA.QuickActions = (() => {
 })();
 
 /* =========================================================
-   [22] NEXA.ResponsiveCharts — ResizeObserver su canvas
+   [24] ResponsiveCharts
    ========================================================= */
 NEXA.ResponsiveCharts = (() => {
-  let ro = null;
   const rerender = NEXA.Utils.debounce(() => {
     const v = NEXA.Router.current();
     if (v === "dashboard") NEXA.Dashboard.render();
@@ -2881,82 +2991,111 @@ NEXA.ResponsiveCharts = (() => {
     else if (v === "projects") NEXA.Projects.render();
     else if (v === "analytics") NEXA.AnalyticsView.render();
   }, 180);
-
   const init = () => {
     if (!("ResizeObserver" in window)) return;
-    ro = new ResizeObserver(rerender);
+    const ro = new ResizeObserver(rerender);
     document.querySelectorAll("canvas").forEach(c => ro.observe(c));
   };
   return Object.freeze({init});
 })();
 
 /* =========================================================
-   [23] NEXA.Boot — Entry point
+   [25] Boot — FIXED: watchdog + proper init order
    ========================================================= */
 NEXA.Boot = (() => {
-  const init = () => {
-    // Tema
-    NEXA.Theme.init();
-
-    // Seed se primo avvio
-    if (NEXA.Seed.needsSeed()) NEXA.Seed.apply();
-
-    // Auth
-    NEXA.Auth.init();
-
-    // Binding moduli
-    NEXA.Expenses.bind();
-    NEXA.Clients.bind();
-    NEXA.Projects.bind();
-    NEXA.AI.bind();
-
-    // Render iniziale
-    NEXA.Dashboard.render();
-    NEXA.Expenses.render();
-    NEXA.Clients.render();
-    NEXA.Projects.render();
-    NEXA.AnalyticsView.render();
-
-    // Re-render al cambio vista
-    NEXA.EventBus.on("route:change", (v) => {
-      if (v === "dashboard")  NEXA.Dashboard.render();
-      if (v === "expenses")   NEXA.Expenses.render();
-      if (v === "clients")    NEXA.Clients.render();
-      if (v === "projects")   NEXA.Projects.render();
-      if (v === "analytics")  NEXA.AnalyticsView.render();
-    });
-
-    // Re-render globale quando cambiano i dati
-    NEXA.EventBus.on("state:changed", () => {
-      const v = NEXA.Router.current();
-      NEXA.Dashboard.render();
-      if (v === "expenses")  NEXA.Expenses.render();
-      if (v === "clients")   NEXA.Clients.render();
-      if (v === "projects")  NEXA.Projects.render();
-      if (v === "analytics") NEXA.AnalyticsView.render();
-    });
-
-    // Re-render su cambio tema (per colori grafici)
-    NEXA.EventBus.on("theme:change", () => {
-      const v = NEXA.Router.current();
-      if (v === "dashboard")  NEXA.Dashboard.render();
-      if (v === "expenses")   NEXA.Expenses.render();
-      if (v === "clients")    NEXA.Clients.render();
-      if (v === "projects")   NEXA.Projects.render();
-      if (v === "analytics")  NEXA.AnalyticsView.render();
-    });
-
-    // Resize observer
-    NEXA.ResponsiveCharts.init();
-
-    // Hide boot
-    setTimeout(() => NEXA.UI.hideBoot(), 1200);
-
-    // Welcome toast
-    setTimeout(() => {
-      NEXA.UI.toast({type:"info", title:"NEXA pronto", msg:"Premi ⌘K per la command palette"});
-    }, 2200);
+  const log = (msg) => {
+    console.log("[NEXA.Boot]", msg);
+    try { NEXA.UI.setBootLog(msg); } catch {}
   };
+
+  const init = () => {
+    try {
+      log("theme…");
+      NEXA.Theme.init();
+
+      log("storage…");
+      if (NEXA.Seed.needsSeed()) {
+        log("seeding demo data…");
+        NEXA.Seed.apply();
+      }
+
+      log("bindings…");
+      NEXA.Expenses.bind();
+      NEXA.Clients.bind();
+      NEXA.Projects.bind();
+      NEXA.AI.bind();
+      NEXA.Settings.init();
+
+      log("initial render…");
+      NEXA.Dashboard.render();
+      NEXA.Expenses.render();
+      NEXA.Clients.render();
+      NEXA.Projects.render();
+      NEXA.AnalyticsView.render();
+
+      NEXA.EventBus.on("route:change", (v) => {
+        if (v === "dashboard")  NEXA.Dashboard.render();
+        if (v === "expenses")   NEXA.Expenses.render();
+        if (v === "clients")    NEXA.Clients.render();
+        if (v === "projects")   NEXA.Projects.render();
+        if (v === "analytics")  NEXA.AnalyticsView.render();
+        if (v === "settings")   NEXA.Settings.loadIntoForm();
+      });
+
+      NEXA.EventBus.on("state:changed", () => {
+        const v = NEXA.Router.current();
+        NEXA.Dashboard.render();
+        if (v === "expenses")  NEXA.Expenses.render();
+        if (v === "clients")   NEXA.Clients.render();
+        if (v === "projects")  NEXA.Projects.render();
+        if (v === "analytics") NEXA.AnalyticsView.render();
+      });
+
+      NEXA.EventBus.on("theme:change", () => {
+        const v = NEXA.Router.current();
+        if (v === "dashboard")  NEXA.Dashboard.render();
+        if (v === "expenses")   NEXA.Expenses.render();
+        if (v === "clients")    NEXA.Clients.render();
+        if (v === "projects")   NEXA.Projects.render();
+        if (v === "analytics")  NEXA.AnalyticsView.render();
+      });
+
+      NEXA.ResponsiveCharts.init();
+
+      log("auth…");
+      NEXA.Auth.init();
+
+      log("ready ✓");
+      setTimeout(() => NEXA.UI.hideBoot(), 900);
+      setTimeout(() => {
+        NEXA.UI.toast({type:"info", title:"NEXA pronto", msg:"Premi ⌘K per command palette"});
+      }, 1800);
+
+    } catch (e) {
+      console.error("[NEXA.Boot] CRITICAL:", e);
+      log("error: " + e.message);
+      // Fail-safe: mostra comunque auth o app
+      try {
+        document.getElementById("boot").classList.add("hide");
+        document.getElementById("auth").classList.remove("hide");
+      } catch {}
+      NEXA.UI.toast({type:"error", title:"Errore init", msg:e.message});
+    }
+  };
+
+  // Watchdog: se dopo 5s boot è ancora visibile, forza sblocco
+  setTimeout(() => {
+    const boot = document.getElementById("boot");
+    const auth = document.getElementById("auth");
+    const app  = document.getElementById("app");
+    if (boot && !boot.classList.contains("hide")) {
+      console.warn("[Watchdog] Boot ancora visibile dopo 5s, forzo sblocco");
+      boot.classList.add("hide");
+      if (app && !app.classList.contains("show")) {
+        if (auth) auth.classList.remove("hide");
+      }
+    }
+  }, 5000);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
